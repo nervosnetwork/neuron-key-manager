@@ -1,6 +1,6 @@
 # Neuron Key Manager
 
-[![Azure Pipelines Build Status](https://dev.azure.com/nervosnetwork/neuron/_apis/build/status/nervosnetwork.neuron-key-manager?branchName=develop)](https://dev.azure.com/nervosnetwork/neuron-key-manager/_build/latest?definitionId=8&branchName=develop)
+[![Build Status](https://dev.azure.com/nervosnetwork/neuron-key-manager/_apis/build/status/nervosnetwork.neuron-key-manager?branchName=develop)](https://dev.azure.com/nervosnetwork/neuron-key-manager/_build/latest?definitionId=11&branchName=develop)
 [![Telegram Group](https://cdn.rawgit.com/Patrolavia/telegram-badge/8fe3382b/chat.svg)](https://t.me/nervos_ckb_dev)
 
 ---
