@@ -3,16 +3,16 @@
   "productName": "Neuron",
   "description": "CKB Neuron Wallet",
   "homepage": "https://www.nervos.org/",
-  "version": "0.22.0",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
     "email": "dev@nervos.org",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "main": "dist/main.js",
   "license": "MIT",
@@ -64,7 +64,7 @@
     "electron-devtools-installer": "2.2.4",
     "electron-notarize": "0.1.1",
     "lint-staged": "9.2.5",
-    "neuron-ui": "0.22.0",
+    "neuron-ui": "1.0.0",
     "rimraf": "3.0.0",
     "spectron": "8.0.0",
     "ts-transformer-imports": "0.4.3",

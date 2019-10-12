@@ -1,17 +1,17 @@
 {
   "name": "neuron",
-  "productName": "Neuron",
-  "description": "CKB Neuron Wallet",
-  "version": "0.22.0",
+  "productName": "Neuron Key Manager",
+  "description": "CKB Neuron Key Manager",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
     "email": "dev@nervos.org",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "license": "MIT",
   "engines": {

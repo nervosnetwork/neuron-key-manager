@@ -1,6 +1,6 @@
-appId: com.nervos.neuron
+appId: com.nervos.neuron-key-manager
 copyright: Copyright (C) 2019 Nervos Foundation.
-productName: Neuron
+productName: Neuron Key Manager
 
 asar: true
 
@@ -43,7 +43,7 @@ dmg:
 
 win:
   verifyUpdateCodeSignature: false
-  artifactName: "${productName}-v${version}-${os}-${arch}-installer.${ext}"
+  artifactName: "Neuron-Key-Manager-v${version}-${os}-installer.${ext}"
   icon: assets/images/icon.ico
   target:
     - target: nsis
@@ -51,7 +51,7 @@ win:
         - x64
 
 mac:
-  artifactName: "${productName}-v${version}-${os}.${ext}"
+  artifactName: "Neuron-Key-Manager-v${version}-${os}.${ext}"
   category: public.app-category.finance
   icon: assets/images/icon.icns
   hardenedRuntime: true
@@ -64,7 +64,7 @@ mac:
     - zip
 
 linux:
-  artifactName: "${productName}-v${version}-${os}-${arch}.${ext}"
+  artifactName: "Neuron-Key-Manager-v${version}-${os}-${arch}.${ext}"
   category: Finance
   icon: assets/images/
   target:

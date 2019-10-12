@@ -1,15 +1,15 @@
 {
   "name": "neuron-ui",
-  "version": "0.22.0",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
     "email": "dev@nervos.org",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "homepage": "./",
   "main": "./build",
