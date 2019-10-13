@@ -1,9 +1,6 @@
-# Neuron
+# Neuron Key Manager
 
-Nervos CKB Desktop Wallet
-
-[![Azure Pipelines Build Status](https://dev.azure.com/nervosnetwork/neuron/_apis/build/status/nervosnetwork.neuron?branchName=develop)](https://dev.azure.com/nervosnetwork/neuron/_build/latest?definitionId=8&branchName=develop)
-[![TravisCI](https://travis-ci.com/nervosnetwork/neuron.svg?branch=develop)](https://travis-ci.com/nervosnetwork/neuron)
+[![Build Status](https://dev.azure.com/nervosnetwork/neuron-key-manager/_apis/build/status/nervosnetwork.neuron-key-manager?branchName=develop)](https://dev.azure.com/nervosnetwork/neuron-key-manager/_build/latest?definitionId=11&branchName=develop)
 [![Telegram Group](https://cdn.rawgit.com/Patrolavia/telegram-badge/8fe3382b/chat.svg)](https://t.me/nervos_ckb_dev)
 
 ---
@@ -12,7 +9,7 @@ Nervos CKB Desktop Wallet
 
 ### Prerequisites
 
-You will need `node >= 12` and `yarn >= 1.14` to build and run Neuron.
+You will need `node >= 12` and `yarn >= 1.14` to build and run Neuron Key Manager.
 
 #### Lerna
 
@@ -32,11 +29,7 @@ After lerna has been installed, run this to install and link dependencies:
 $ yarn bootstrap
 ```
 
-### Start Neuron
-
-A local CKB node is required for Neuron wallet to talk to it via RPC APIs and get data. Please follow the [Nervos CKB doc](https://docs.nervos.org/getting-started/introduction) to get CKB node up and running first.
-
-### Start Neuron in Development Mode
+### Start Neuron Key Manager
 
 ```sh
 $ yarn start
@@ -66,10 +59,10 @@ $ yarn start:wallet
 $ yarn test
 ```
 
-## Download Neuron Binary
+## Download Neuron Key Manager
 
-If you don't want to bother building from source, you can download a binary from [releases](https://github.com/nervosnetwork/neuron/releases). We offer pre-built binaries for Windows, Linux and macOS.
+If you don't want to bother building from source, you can download a binary from [releases](https://github.com/nervosnetwork/neuron-key-manager/releases). We offer pre-built binaries for Windows, Linux and macOS.
 
 ## License
 
-Neuron is released under the terms of the MIT license. See [COPYING](COPYING) for more information or see [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
+Neuron Key Manager is released under the terms of the MIT license. See [COPYING](COPYING) for more information or see [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).

@@ -65,7 +65,7 @@ const Welcome = ({ rootPath = '/wizard', wallets = [], history }: WizardElementP
   const [t] = useTranslation()
   useEffect(() => {
     if (wallets.length) {
-      history.push(Routes.Overview)
+      history.push(Routes.Receive)
     }
   }, [wallets, history])
 

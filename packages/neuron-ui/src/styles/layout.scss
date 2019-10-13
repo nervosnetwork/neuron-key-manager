@@ -1,22 +1,11 @@
 body {
   display: grid;
   grid-template:
-    'navbar navbar navbar' auto
     'notification notification notification' auto
     'content content content' 1fr
-    'content content content' 1fr
-    'footer  footer  footer' 22px /
-    1fr 1fr 1fr;
+    'content content content' 1fr;
 
   height: 100vh;
-}
-
-footer {
-  grid-area: footer;
-}
-
-.navbar {
-  grid-area: navbar;
 }
 
 .main-content {

@@ -17,6 +17,7 @@
       "node_modules/@nervosnetwork/ckb-types",
       "node_modules/@types"
     ],
+    "types": ["node"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true
   },

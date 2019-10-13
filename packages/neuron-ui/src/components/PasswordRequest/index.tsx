@@ -3,17 +3,14 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Stack, Text, Label, Modal, TextField, PrimaryButton, DefaultButton } from 'office-ui-fabric-react'
 import { StateWithDispatch, AppActions } from 'states/stateProvider/reducer'
-import { sendTransaction, deleteWallet, backupWallet } from 'states/stateProvider/actionCreators'
-import { priceToFee, CKBToShannonFormatter } from 'utils/formatters'
+import { deleteWallet, backupWallet } from 'states/stateProvider/actionCreators'
 
 const PasswordRequest = ({
   app: {
-    send: { txID, outputs, description, price, cycles },
     loadings: { sending: isSending = false },
     passwordRequest: { walletID = '', actionType = null, password = '' },
   },
   settings: { wallets = [] },
-  history,
   dispatch,
 }: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps>) => {
   const [t] = useTranslation()
@@ -27,23 +24,6 @@ const PasswordRequest = ({
 
   const onConfirm = useCallback(() => {
     switch (actionType) {
-      case 'send': {
-        if (isSending) {
-          break
-        }
-        sendTransaction({
-          id: txID,
-          walletID,
-          items: outputs.map(output => ({
-            address: output.address,
-            capacity: CKBToShannonFormatter(output.amount, output.unit),
-          })),
-          description,
-          password,
-          fee: priceToFee(price, cycles),
-        })(dispatch, history)
-        break
-      }
       case 'delete': {
         deleteWallet({
           id: walletID,
@@ -62,7 +42,7 @@ const PasswordRequest = ({
         break
       }
     }
-  }, [dispatch, walletID, password, actionType, txID, description, outputs, cycles, price, history, isSending])
+  }, [dispatch, walletID, password, actionType])
 
   const onChange = useCallback(
     (_e, value?: string) => {

@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { RouteComponentProps, Link } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { Stack, TextField, PrimaryButton, DefaultButton } from 'office-ui-fabric-react'
 
 import { StateWithDispatch } from 'states/stateProvider/reducer'
 
-import { Routes, ErrorCode } from 'utils/const'
+import { ErrorCode } from 'utils/const'
 
 import { useGoBack } from 'utils/hooks'
 import { useHint, useOnConfirm, useInputs, useWalletEditor } from './hooks'
@@ -15,9 +15,6 @@ const WalletNotFound = () => {
   return (
     <div>
       <p>{t(`messages.codes.${ErrorCode.FieldNotFound}`, { fieldName: 'wallet' })}</p>
-      <Link to={Routes.SettingsWallets} className="btn btn-primary">
-        {`${t('navbar.settings')}-${t('settings.setting-tabs.wallets')}`}
-      </Link>
     </div>
   )
 }

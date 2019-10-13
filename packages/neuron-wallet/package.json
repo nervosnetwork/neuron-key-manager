@@ -1,18 +1,18 @@
 {
   "name": "neuron-wallet",
-  "productName": "Neuron",
-  "description": "CKB Neuron Wallet",
+  "productName": "Neuron Key Manager",
+  "description": "CKB Neuron Wallet - Key Manager",
   "homepage": "https://www.nervos.org/",
-  "version": "0.22.0",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
     "email": "dev@nervos.org",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nervosnetwork/neuron"
+    "url": "https://github.com/nervosnetwork/neuron-key-manager"
   },
   "main": "dist/main.js",
   "license": "MIT",
@@ -22,16 +22,8 @@
     "build": "ttsc && ncp ./src/startup/sync-block-task/index.html ./dist/startup/sync-block-task/index.html",
     "clean": "rimraf dist/*",
     "test": "jest --color",
-    "test:e2e": "jest --config jest.e2e.config.js --color",
     "lint": "eslint --fix --ext .ts,.js src",
-    "precommit": "lint-staged",
     "rebuild:nativemodules": "electron-builder install-app-deps"
-  },
-  "lint-staged": {
-    "src/**/*.ts": [
-      "eslint --fix",
-      "git add"
-    ]
   },
   "dependencies": {
     "@nervosnetwork/ckb-sdk-core": "0.22.0",
@@ -63,8 +55,7 @@
     "electron-builder": "21.2.0",
     "electron-devtools-installer": "2.2.4",
     "electron-notarize": "0.1.1",
-    "lint-staged": "9.2.5",
-    "neuron-ui": "0.22.0",
+    "neuron-ui": "1.0.0",
     "rimraf": "3.0.0",
     "spectron": "8.0.0",
     "ts-transformer-imports": "0.4.3",

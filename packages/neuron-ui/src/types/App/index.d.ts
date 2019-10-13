@@ -56,13 +56,6 @@ declare namespace State {
     content?: string
     meta?: Meta
   }
-  interface Send {
-    txID: string
-    outputs: Output[]
-    price: string
-    cycles: string
-    description: string
-  }
 
   interface Popup {
     timestamp: Date
@@ -70,11 +63,6 @@ declare namespace State {
   }
 
   interface App {
-    tipBlockNumber: string
-    chain: string
-    difficulty: string
-    epoch: string
-    send: Send
     passwordRequest: {
       actionType: 'send' | 'backup' | 'delete' | null
       walletID: string
@@ -94,16 +82,6 @@ declare namespace State {
     showTopAlert: boolean
     showAllNotifications: boolean
     isAllowedToFetchList: boolean
-  }
-
-  interface NetworkProperty {
-    name: string
-    remote: string
-    chain: 'ckb' | 'ckb_testnet' | 'ckb_dev' | string
-  }
-
-  interface Network extends NetworkProperty {
-    id: NetworkID
   }
 
   interface WalletIdentity {
@@ -127,31 +105,12 @@ declare namespace State {
     addresses: Address[]
   }
 
-  interface Chain {
-    networkID: string
-    connectionStatus: 'online' | 'offline'
-    tipBlockNumber: string
-    codeHash: string
-    transactions: {
-      pageNo: number
-      pageSize: number
-      totalCount: number
-      items: Transaction[]
-      keywords: string
-    }
-  }
   interface Settings {
-    general: {
-      skipDataAndType: boolean
-      showAddressBook: boolean
-    }
-    networks: Network[]
     wallets: WalletIdentity[]
   }
 
   interface AppWithNeuronWallet {
     app: App
-    chain: Chain
     settings: Settings
     wallet: Wallet
   }

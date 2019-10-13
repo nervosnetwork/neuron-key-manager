@@ -39,8 +39,8 @@
       "more": "查看更多记录"
     },
     "wizard": {
-      "welcome-to-nervos-neuron": "欢迎使用 Neuron",
-      "create-or-import-your-first-wallet": "创建或导入您的第一个钱包",
+      "welcome-to-nervos-neuron": "欢迎使用 Neuron Key Manager",
+      "create-or-import-your-first-wallet": "创建或导入一个钱包",
       "create-new-wallet": "创建新钱包",
       "import-mnemonic": "导入助记词",
       "import-keystore": "导入 Keystore 文件",
@@ -103,9 +103,10 @@
     },
     "receive": {
       "click-to-copy": "点击复制地址",
+      "copy-address": "复制地址",
       "address-not-found": "未找到地址",
-      "prompt": "为了保护隐私，Neuron 会自动选择一个新收款地址。如果您想使用旧的收款地址，请访问地址管理页面。",
-      "address-qrcode": "地址二维码"
+      "prompt": "CKB 主网上线后，请使用官方 Neuron 钱包查看余额或进行转账操作。",
+      "mainnet-address": "CKB 主网地址"
     },
     "history": {
       "meta": "元信息",
@@ -222,7 +223,7 @@
     },
     "qrcode": {
       "copy": "复制图片",
-      "save": "保存图片"
+      "save": "保存二维码图片"
     },
     "footer": {
       "fail-to-fetch-tip-block-number": "无法获取最新高度"

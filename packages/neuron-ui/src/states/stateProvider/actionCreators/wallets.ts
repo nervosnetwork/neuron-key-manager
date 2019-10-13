@@ -7,9 +7,6 @@ import {
   getCurrentWallet,
   updateWallet,
   setCurrentWallet as setRemoteCurrentWallet,
-  sendCapacity,
-  getAddressesByWalletID,
-  updateAddressDescription as updateRemoteAddressDescription,
   deleteWallet as deleteRemoteWallet,
   backupWallet as backupRemoteWallet,
   showErrorMessage,
@@ -19,7 +16,7 @@ import { WalletWizardPath } from 'components/WalletWizard'
 import i18n from 'utils/i18n'
 import { wallets as walletsCache, currentWallet as currentWalletCache } from 'services/localCache'
 import { Routes } from 'utils/const'
-import { addressesToBalance, failureResToNotification } from 'utils/formatters'
+import { failureResToNotification } from 'utils/formatters'
 import { NeuronWalletActions } from '../reducer'
 import { addNotification, addPopup } from './app'
 
@@ -47,7 +44,7 @@ export const createWalletWithMnemonic = (params: Controller.ImportMnemonicParams
 ) => {
   createWallet(params).then(res => {
     if (res.status === 1) {
-      history.push(Routes.Overview)
+      history.push(Routes.Receive)
     } else if (res.status > 0) {
       showErrorMessage(i18n.t(`messages.error`), i18n.t(`messages.codes.${res.status}`))
     } else if (res.message) {
@@ -65,7 +62,7 @@ export const importWalletWithMnemonic = (params: Controller.ImportMnemonicParams
 ) => {
   importMnemonic(params).then(res => {
     if (res.status === 1) {
-      history.push(Routes.Overview)
+      history.push(Routes.Receive)
     } else if (res.status > 0) {
       showErrorMessage(i18n.t(`messages.error`), i18n.t(`messages.codes.${res.status}`))
     } else if (res.message) {
@@ -83,7 +80,7 @@ export const importWalletWithKeystore = (params: Controller.ImportKeystoreParams
 ) => {
   importKeystore(params).then(res => {
     if (res.status === 1) {
-      history.push(Routes.Overview)
+      history.push(Routes.Receive)
     } else if (res.status > 0) {
       showErrorMessage(i18n.t(`messages.error`), i18n.t(`messages.codes.${res.status}`))
     } else if (res.message) {
@@ -121,7 +118,7 @@ export const updateWalletProperty = (params: Controller.UpdateWalletParams) => (
     if (res.status) {
       addPopup('update-wallet-successfully')(dispatch)
       if (history) {
-        history.push(Routes.SettingsWallets)
+        history.push(Routes.Receive)
       }
     } else {
       addNotification(failureResToNotification(res))(dispatch)
@@ -134,89 +131,6 @@ export const setCurrentWallet = (id: string) => (dispatch: StateDispatch) => {
       dispatch({
         type: AppActions.Ignore,
         payload: null,
-      })
-    } else {
-      addNotification(failureResToNotification(res))(dispatch)
-    }
-  })
-}
-
-export const sendTransaction = (params: Controller.SendTransaction) => (dispatch: StateDispatch, history: any) => {
-  dispatch({
-    type: AppActions.UpdateLoadings,
-    payload: {
-      sending: true,
-    },
-  })
-  setTimeout(() => {
-    sendCapacity(params)
-      .then(res => {
-        if (res.status === 1) {
-          history.push(Routes.History)
-        } else {
-          addNotification({
-            type: 'alert',
-            timestamp: +new Date(),
-            code: res.status,
-            content: (typeof res.message === 'string' ? res.message : res.message.content || '').replace(
-              /(\b"|"\b)/g,
-              ''
-            ),
-            meta: typeof res.message === 'string' ? undefined : res.message.meta,
-          })(dispatch)
-        }
-        dispatch({
-          type: AppActions.DismissPasswordRequest,
-          payload: null,
-        })
-      })
-      .catch(err => {
-        console.warn(err)
-      })
-      .finally(() => {
-        dispatch({
-          type: AppActions.UpdateLoadings,
-          payload: {
-            sending: false,
-          },
-        })
-      })
-  }, 0)
-}
-
-export const updateAddressListAndBalance = (params: Controller.GetAddressesByWalletIDParams) => (
-  dispatch: StateDispatch
-) => {
-  getAddressesByWalletID(params).then(res => {
-    if (res.status) {
-      const addresses = res.result || []
-      const balance = addressesToBalance(addresses)
-      dispatch({
-        type: NeuronWalletActions.UpdateAddressListAndBalance,
-        payload: { addresses, balance },
-      })
-    } else {
-      addNotification(failureResToNotification(res))(dispatch)
-    }
-  })
-}
-
-export const updateAddressDescription = (params: Controller.UpdateAddressDescriptionParams) => (
-  dispatch: StateDispatch
-) => {
-  const descriptionParams = {
-    address: params.address,
-    description: params.description,
-  }
-  dispatch({
-    type: NeuronWalletActions.UpdateAddressDescription,
-    payload: descriptionParams,
-  })
-  updateRemoteAddressDescription(params).then(res => {
-    if (res.status) {
-      dispatch({
-        type: NeuronWalletActions.UpdateAddressDescription,
-        payload: descriptionParams,
       })
     } else {
       addNotification(failureResToNotification(res))(dispatch)
@@ -261,9 +175,6 @@ export default {
   updateWalletList,
   updateWallet,
   setCurrentWallet,
-  sendTransaction,
-  updateAddressListAndBalance,
-  updateAddressDescription,
   deleteWallet,
   backupWallet,
 }
