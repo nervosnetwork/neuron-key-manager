@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise */
 import React, { useEffect, useRef, useCallback } from 'react'
 import canvg from 'canvg'
-import { Stack, DefaultButton } from 'office-ui-fabric-react'
+import { Stack, DefaultButton, ActionButton } from 'office-ui-fabric-react'
 import { useTranslation } from 'react-i18next'
 import { addPopup } from 'states/stateProvider/actionCreators'
 import { StateDispatch } from 'states/stateProvider/reducer'
@@ -129,12 +129,7 @@ const QRCode = ({
   }, [])
 
   const onCopy = useCallback(() => {
-    if (canvasRef.current === null) {
-      return
-    }
-    const dataURL = canvasRef.current.toDataURL('image/png')
-    const img = window.nativeImage.createFromDataURL(dataURL)
-    window.clipboard.writeImage(img)
+    window.navigator.clipboard.writeText(value)
     addPopup('qrcode-copied')(dispatch)
   }, [dispatch])
 
@@ -153,13 +148,18 @@ const QRCode = ({
   }, [svgStr, size])
 
   return (
-    <Stack tokens={{ childrenGap: 15 }} horizontalAlign="center" verticalAlign="center">
-      <Stack.Item>
+    <Stack tokens={{ childrenGap: 15 }} horizontalAlign="stretch" verticalAlign="center">
+      <Stack horizontalAlign="center">
         <canvas ref={canvasRef} width={size} height={size} onClick={onQRCodeClick} />
-      </Stack.Item>
+      </Stack>
+
+      <ActionButton onClick={onCopy} styles={{ root: { fontSize: 18 } }}>
+        {value}
+      </ActionButton>
+
       {exportable ? (
         <Stack horizontal horizontalAlign="space-between">
-          <DefaultButton onClick={onCopy}>{t('qrcode.copy')}</DefaultButton>
+          <DefaultButton onClick={onCopy}>{t('receive.copy-address')}</DefaultButton>
           <DefaultButton onClick={onDownload}>{t('qrcode.save')}</DefaultButton>
         </Stack>
       ) : null}

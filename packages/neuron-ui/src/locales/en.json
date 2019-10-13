@@ -103,8 +103,10 @@
     },
     "receive": {
       "click-to-copy": "Click to copy the address",
+      "copy-address": "Copy Addres",
       "address-not-found": "Address not found",
-      "prompt": "Neuron picks a new receiving address for better privacy. Please go to the Address Book if you want to use a previously used receiving address.",
+      "prompt": "Please use the official Neuron wallet to check balance and process transactions after CKB mainnet launch.",
+      "mainnet-address": "CKB Mainnet Address",
       "address-qrcode": "Address QR Code"
     },
     "history": {
@@ -222,7 +224,7 @@
     },
     "qrcode": {
       "copy": "Copy image",
-      "save": "Save image"
+      "save": "Save QR Image"
     },
     "footer": {
       "fail-to-fetch-tip-block-number": "Cannot fetch tip block number"
