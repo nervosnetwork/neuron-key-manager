@@ -31,16 +31,9 @@
     "build": "lerna run --stream build",
     "release": "yarn build && ./scripts/copy-ui-files.sh && ./scripts/release.sh",
     "test": "lerna run --parallel test",
-    "test:e2e": "yarn build && ./scripts/copy-ui-files.sh && lerna run --parallel test:e2e",
     "lint": "lerna run --stream lint",
     "postinstall": "lerna run rebuild:nativemodules",
-    "db:chain": "node ./node_modules/.bin/typeorm",
     "db:address": "node ./node_modules/.bin/typeorm --config ormconfig-address.json"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lerna run --no-bail --stream precommit"
-    }
   },
   "devDependencies": {
     "@types/jest": "24.0.18",
@@ -49,7 +42,6 @@
     "concurrently": "4.1.2",
     "cross-env": "5.2.1",
     "eslint": "6.3.0",
-    "husky": "3.0.5",
     "lerna": "3.16.4",
     "ncp": "2.0.0",
     "nodemon": "1.19.2",
