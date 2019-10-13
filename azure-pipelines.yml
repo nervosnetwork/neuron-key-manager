@@ -4,8 +4,6 @@ trigger:
     include:
       - master
       - develop
-      - e2e-tests
-      - rc/*
   tags:
     include:
       - refs/tags/v*
@@ -82,21 +80,6 @@ jobs:
     - script: |
         set CI=true
         yarn test
-      name: Test
-
-  - job: Integration
-    pool:
-      vmImage: 'macos-10.14'
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: 12.x
-      displayName: 'Install Node.js'
-    - script: |
-        yarn global add lerna
-        yarn bootstrap
-      name: Bootstrap
-    - script: yarn test:e2e
       name: Test
 
   - job: Release
