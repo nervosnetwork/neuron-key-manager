@@ -43,7 +43,7 @@ dmg:
 
 win:
   verifyUpdateCodeSignature: false
-  artifactName: "Neuron-Key-Manager-v${version}-${os}-installer.${ext}"
+  artifactName: "Neuron-Key-Manager-${os}-installer.${ext}"
   icon: assets/images/icon.ico
   target:
     - target: nsis
@@ -51,7 +51,7 @@ win:
         - x64
 
 mac:
-  artifactName: "Neuron-Key-Manager-v${version}-${os}.${ext}"
+  artifactName: "Neuron-Key-Manager-${os}.${ext}"
   category: public.app-category.finance
   icon: assets/images/icon.icns
   hardenedRuntime: true
@@ -64,7 +64,7 @@ mac:
     - zip
 
 linux:
-  artifactName: "Neuron-Key-Manager-v${version}-${os}-${arch}.${ext}"
+  artifactName: "Neuron-Key-Manager-${os}-${arch}.${ext}"
   category: Finance
   icon: assets/images/
   target:

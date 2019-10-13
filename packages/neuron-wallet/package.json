@@ -1,7 +1,7 @@
 {
   "name": "neuron-wallet",
-  "productName": "Neuron",
-  "description": "CKB Neuron Wallet",
+  "productName": "Neuron Key Manager",
+  "description": "CKB Neuron Wallet - Key Manager",
   "homepage": "https://www.nervos.org/",
   "version": "1.0.0",
   "private": true,

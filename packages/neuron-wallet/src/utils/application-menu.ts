@@ -29,14 +29,6 @@ const generateTemplate = () => {
           }
         },
       },
-      {
-        label: i18n.t('application-menu.neuron.check-updates'),
-        click: (menuItem: MenuItem) => {
-          if (AppController) {
-            AppController.checkUpdates(menuItem)
-          }
-        },
-      },
       separator,
       {
         id: 'preference',
@@ -219,14 +211,6 @@ const generateTemplate = () => {
       click: () => {
         if (AppController) {
           AppController.showPreference()
-        }
-      },
-    })
-    helpSubmenu.push({
-      label: i18n.t('application-menu.neuron.check-updates'),
-      click: (menuItem: MenuItem) => {
-        if (AppController) {
-          AppController.checkUpdates(menuItem)
         }
       },
     })

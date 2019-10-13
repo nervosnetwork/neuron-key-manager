@@ -3,7 +3,6 @@ import {
   dialog,
   shell,
   Menu,
-  MenuItem,
   MessageBoxOptions,
   MessageBoxReturnValue,
   SaveDialogOptions,
@@ -18,7 +17,6 @@ import NetworksService from 'services/networks'
 import WalletsService from 'services/wallets'
 import WalletsController from 'controllers/wallets'
 import SyncInfoController from 'controllers/sync-info'
-import UpdateController from 'controllers/update'
 import SkipDataAndType from 'services/settings/skip-data-and-type'
 
 import { ResponseCode } from 'utils/const'
@@ -188,10 +186,6 @@ export default class AppController {
       cancelId: 0,
     }
     AppController.showMessageBox(options)
-  }
-
-  public static checkUpdates(menuItem: MenuItem) {
-    new UpdateController().checkUpdates(menuItem)
   }
 
   public static showPreference() {
