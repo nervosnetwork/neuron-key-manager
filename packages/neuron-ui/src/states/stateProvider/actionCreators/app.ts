@@ -45,7 +45,7 @@ export const initAppState = () => (dispatch: StateDispatch, history: any) => {
         if (!wallet) {
           history.push(`${Routes.WalletWizard}${WalletWizardPath.Welcome}`)
         } else {
-          history.push(Routes.Overview)
+          history.push(Routes.Receive)
         }
 
         currentWalletCache.save(wallet)

@@ -5,17 +5,9 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'states/stateProvider'
 import { StateDispatch } from 'states/stateProvider/reducer'
 
-import Overview from 'components/Overview'
 import WalletWizard from 'components/WalletWizard'
 import ImportKeystore from 'components/ImportKeystore'
-import Send from 'components/Send'
 import Receive from 'components/Receive'
-import History from 'components/History'
-import Transaction from 'components/Transaction'
-import Settings from 'components/Settings'
-import Addresses from 'components/Addresses'
-import NetworkEditor from 'components/NetworkEditor'
-import WalletEditor from 'components/WalletEditor'
 import LaunchScreen from 'components/LaunchScreen'
 import PasswordRequest from 'components/PasswordRequest'
 
@@ -31,63 +23,11 @@ export const mainContents: CustomRouter.Route[] = [
     comp: LaunchScreen,
   },
   {
-    name: `General`,
-    path: Routes.Overview,
-    exact: true,
-    comp: Overview,
-  },
-  {
-    name: `Send`,
-    path: Routes.Send,
-    params: `/:address?`,
-    exact: false,
-    comp: Send,
-  },
-  {
     name: `Receive`,
     path: Routes.Receive,
     params: `/:address?`,
     exact: false,
     comp: Receive,
-  },
-  {
-    name: `History`,
-    path: Routes.History,
-    exact: false,
-    comp: History,
-  },
-  {
-    name: `Transaction`,
-    path: Routes.Transaction,
-    params: `/:hash`,
-    exact: false,
-    comp: Transaction,
-  },
-  {
-    name: `Addresses`,
-    path: Routes.Addresses,
-    exact: false,
-    comp: Addresses,
-  },
-  {
-    name: `Settings`,
-    path: Routes.Settings,
-    exact: false,
-    comp: Settings,
-  },
-  {
-    name: `NetworkEditor`,
-    path: Routes.NetworkEditor,
-    params: '/:id',
-    exact: false,
-    comp: NetworkEditor,
-  },
-  {
-    name: `WalletEditor`,
-    path: Routes.WalletEditor,
-    params: '/:id',
-    exact: false,
-    comp: WalletEditor,
   },
   {
     name: `WalletWizard`,

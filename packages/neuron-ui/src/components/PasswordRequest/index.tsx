@@ -3,8 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Stack, Text, Label, Modal, TextField, PrimaryButton, DefaultButton } from 'office-ui-fabric-react'
 import { StateWithDispatch, AppActions } from 'states/stateProvider/reducer'
-import { sendTransaction, deleteWallet, backupWallet } from 'states/stateProvider/actionCreators'
-import { priceToFee, CKBToShannonFormatter } from 'utils/formatters'
+import { deleteWallet, backupWallet } from 'states/stateProvider/actionCreators'
 
 const PasswordRequest = ({
   app: {
@@ -27,23 +26,6 @@ const PasswordRequest = ({
 
   const onConfirm = useCallback(() => {
     switch (actionType) {
-      case 'send': {
-        if (isSending) {
-          break
-        }
-        sendTransaction({
-          id: txID,
-          walletID,
-          items: outputs.map(output => ({
-            address: output.address,
-            capacity: CKBToShannonFormatter(output.amount, output.unit),
-          })),
-          description,
-          password,
-          fee: priceToFee(price, cycles),
-        })(dispatch, history)
-        break
-      }
       case 'delete': {
         deleteWallet({
           id: walletID,

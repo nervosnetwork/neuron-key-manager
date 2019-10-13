@@ -1,14 +1,7 @@
 import { useEffect } from 'react'
 
 import { NeuronWalletActions, StateDispatch, AppActions } from 'states/stateProvider/reducer'
-import {
-  toggleAddressBook,
-  updateTransactionList,
-  updateCurrentWallet,
-  updateWalletList,
-  updateAddressListAndBalance,
-  initAppState,
-} from 'states/stateProvider/actionCreators'
+import { updateCurrentWallet, updateWalletList, initAppState } from 'states/stateProvider/actionCreators'
 
 import { getWinID } from 'services/remote'
 import {
@@ -146,19 +139,6 @@ export const useSubscription = ({
           if (!isAllowedToFetchList) {
             break
           }
-          updateAddressListAndBalance(walletID)(dispatch)
-          break
-        }
-        case 'transaction': {
-          if (!isAllowedToFetchList) {
-            break
-          }
-          updateTransactionList({
-            walletID,
-            keywords,
-            pageNo,
-            pageSize,
-          })(dispatch)
           break
         }
         case 'current-wallet': {
@@ -208,10 +188,6 @@ export const useSubscription = ({
         switch (type) {
           case 'nav': {
             history.push(payload)
-            break
-          }
-          case 'toggle-address-book': {
-            dispatch(toggleAddressBook())
             break
           }
           case 'delete-wallet': {

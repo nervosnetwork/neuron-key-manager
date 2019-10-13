@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Stack, getTheme, Text, ProgressIndicator, Icon } from 'office-ui-fabric-react'
 
 import { StateWithDispatch } from 'states/stateProvider/reducer'
-import { ConnectionStatus, FULL_SCREENS, Routes } from 'utils/const'
+import { ConnectionStatus, FULL_SCREENS } from 'utils/const'
 import { NeuronWalletContext } from 'states/stateProvider'
 
 const theme = getTheme()
@@ -62,10 +62,7 @@ export const NetworkStatus = ({ name, online }: { name: string; online: boolean 
   )
 }
 
-const Footer = ({
-  history,
-  location: { pathname },
-}: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps>) => {
+const Footer = ({ location: { pathname } }: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps>) => {
   const {
     app: { tipBlockNumber = '0' },
     chain: { networkID = '', connectionStatus = ConnectionStatus.Offline, tipBlockNumber: syncedBlockNumber = '0' },
@@ -73,9 +70,7 @@ const Footer = ({
   } = useContext(NeuronWalletContext)
   const [t] = useTranslation()
 
-  const goToNetworksSetting = useCallback(() => {
-    history.push(Routes.SettingsNetworks)
-  }, [history])
+  const goToNetworksSetting = useCallback(() => {}, [])
 
   if (FULL_SCREENS.find(url => pathname.startsWith(url))) {
     return null

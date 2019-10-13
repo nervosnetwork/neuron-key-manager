@@ -18,22 +18,12 @@ export enum ConnectionStatus {
 
 export enum Routes {
   Launch = '/',
-  Overview = '/overview',
   WalletWizard = '/wizard',
   Wallet = '/wallet',
-  Send = '/send',
   Receive = '/receive',
-  History = '/history',
-  Transaction = '/transaction',
-  Addresses = '/addresses',
-  Settings = '/settings',
-  SettingsGeneral = '/settings/general',
-  SettingsWallets = '/settings/wallets',
-  SettingsNetworks = '/settings/networks',
   CreateWallet = '/wallets/new',
   ImportWallet = '/wallets/import',
   ImportKeystore = '/keystore/import',
-  NetworkEditor = '/network',
   WalletEditor = '/editwallet',
   Prompt = '/prompt',
 }
@@ -56,14 +46,7 @@ export enum MnemonicAction {
   Import = 'import',
 }
 
-export const FULL_SCREENS = [
-  `${Routes.Transaction}/`,
-  `/wizard/`,
-  `/keystore/`,
-  `${Routes.Settings}/`,
-  `${Routes.WalletEditor}/`,
-  `${Routes.NetworkEditor}/`,
-]
+export const FULL_SCREENS = [`/wizard/`, `/keystore/`, `${Routes.WalletEditor}/`]
 
 export enum ErrorCode {
   // Errors from RPC

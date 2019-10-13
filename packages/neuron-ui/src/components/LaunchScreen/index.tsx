@@ -14,7 +14,7 @@ export const LaunchScreen = ({
 
   useEffect(() => {
     if (id) {
-      history.push(Routes.Overview)
+      history.push(Routes.Receive)
     }
   }, [id, history])
 
