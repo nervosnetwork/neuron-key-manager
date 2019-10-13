@@ -1,47 +1,19 @@
 import initStates from 'states/initStates'
-import { ConnectionStatus } from '../../utils/const'
 
 export enum NeuronWalletActions {
   InitAppState = 'initAppState',
-  UpdateCodeHash = 'updateCodeHash',
   // wallets
   UpdateCurrentWallet = 'updateCurrentWallet',
   UpdateWalletList = 'updateWalletList',
-  UpdateAddressListAndBalance = 'updateAddressListAndBalance',
-  UpdateAddressDescription = 'updateAddressDescription',
-  // transactions
-  UpdateTransactionList = 'updateTransactionList',
-  UpdateTransactionDescription = 'updateTransactionDescription',
-  // networks
-  UpdateNetworkList = 'updateNetworkList',
-  UpdateCurrentNetworkID = 'updateCurrentNetworkID',
-  // Connection
-  UpdateConnectionStatus = 'updateConnectionStatus',
-  UpdateSyncedBlockNumber = 'updateSyncedBlockNumber',
-  // settings
-  UpdateSkipDataAndType = 'updateSkipDataAndType',
 }
 export enum AppActions {
-  ToggleAddressBookVisibility = 'toggleAddressBookVisibility',
-  UpdateTransactionID = 'updateTransactionID',
-  AddSendOutput = 'addSendOutput',
-  RemoveSendOutput = 'removeSendOutput',
-  UpdateSendOutput = 'updateSendOutput',
-  UpdateSendPrice = 'updateSendPrice',
-  UpdateSendCycles = 'updateSendCycles',
-  UpdateSendDescription = 'updateSendDescription',
-  ClearSendState = 'clearSendState',
   UpdateMessage = 'updateMessage',
   AddNotification = 'addNotification',
   DismissNotification = 'dismissNotification',
   ClearNotifications = 'clearNotifications',
-  CleanTransaction = 'cleanTransaction',
-  CleanTransactions = 'cleanTransactions',
   RequestPassword = 'requestPassword',
   DismissPasswordRequest = 'dismissPasswordRequest',
   UpdatePassword = 'updatePassword',
-  UpdateTipBlockNumber = 'updateTipBlockNumber',
-  UpdateChainInfo = 'updateChainInfo',
   UpdateLoadings = 'updateLoadings',
 
   PopIn = 'popIn',
@@ -61,7 +33,7 @@ export const reducer = (
   state: State.AppWithNeuronWallet,
   { type, payload }: { type: StateActions; payload: any }
 ): State.AppWithNeuronWallet => {
-  const { app, wallet, settings, chain } = state
+  const { app, wallet, settings } = state
   if (process.env.NODE_ENV === 'development' && window.localStorage.getItem('log-action')) {
     console.group(`type: ${type}`)
     console.info(payload)
@@ -70,68 +42,12 @@ export const reducer = (
   switch (type) {
     // Actions of Neuron Wallet
     case NeuronWalletActions.InitAppState: {
-      const {
-        wallets,
-        wallet: incomingWallet,
-        networks,
-        currentNetworkID: networkID,
-        transactions,
-        syncedBlockNumber,
-        connectionStatus,
-        codeHash,
-        skipDataAndType,
-      } = payload
+      const { wallets, wallet: incomingWallet } = payload
       return {
         ...state,
         wallet: incomingWallet || wallet,
-        chain: {
-          ...state.chain,
-          networkID,
-          transactions,
-          codeHash,
-          connectionStatus: connectionStatus ? ConnectionStatus.Online : ConnectionStatus.Offline,
-          tipBlockNumber: syncedBlockNumber,
-        },
         settings: {
-          general: {
-            ...state.settings.general,
-            skipDataAndType,
-          },
-          networks,
           wallets,
-        },
-      }
-    }
-    case AppActions.ToggleAddressBookVisibility: {
-      return {
-        ...state,
-        settings: {
-          ...settings,
-          general: {
-            ...settings.general,
-            showAddressBook: !settings.general.showAddressBook,
-          },
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateSkipDataAndType: {
-      return {
-        ...state,
-        settings: {
-          ...settings,
-          general: {
-            ...settings.general,
-            skipDataAndType: payload,
-          },
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateCodeHash: {
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          codeHash: payload,
         },
       }
     }
@@ -150,248 +66,6 @@ export const reducer = (
         settings: {
           ...settings,
           wallets: payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateAddressDescription: {
-      /**
-       * payload:{
-       *   address: string
-       *   description: string
-       * }
-       */
-      return {
-        ...state,
-        wallet: {
-          ...wallet,
-          addresses: wallet.addresses.map(addr =>
-            addr.address === payload.address ? { ...addr, description: payload.description } : addr
-          ),
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateAddressListAndBalance: {
-      return {
-        ...state,
-        wallet: {
-          ...wallet,
-          ...payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateTransactionList: {
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          transactions: payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateTransactionDescription: {
-      /**
-       * payload: {
-       *   hash: string,
-       *   description: string
-       * }
-       */
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          transactions: {
-            ...chain.transactions,
-            items: chain.transactions.items.map(tx =>
-              tx.hash === payload.hash ? { ...tx, description: payload.description } : tx
-            ),
-          },
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateNetworkList: {
-      return {
-        ...state,
-        settings: {
-          ...settings,
-          networks: payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateCurrentNetworkID: {
-      return {
-        ...state,
-        app: {
-          ...app,
-          tipBlockNumber: '0',
-          chain: '',
-          difficulty: '',
-          epoch: '',
-        },
-        chain: {
-          ...chain,
-          networkID: payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateConnectionStatus: {
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          connectionStatus: payload,
-        },
-      }
-    }
-    case NeuronWalletActions.UpdateSyncedBlockNumber: {
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          tipBlockNumber: payload,
-        },
-      }
-    }
-    // Actions of App
-    case AppActions.UpdateTipBlockNumber: {
-      /**
-       * paylaod: tipBlockNumber
-       */
-      return {
-        ...state,
-        app: {
-          ...state.app,
-          tipBlockNumber: payload,
-        },
-      }
-    }
-    case AppActions.UpdateChainInfo: {
-      return {
-        ...state,
-        app: {
-          ...app,
-          ...payload,
-        },
-      }
-    }
-    case AppActions.UpdateTransactionID: {
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            txID: Math.round(Math.random() * 100000).toString(),
-          },
-        },
-      }
-    }
-    case AppActions.AddSendOutput: {
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            outputs: [...app.send.outputs, initStates.app.send.outputs[0]],
-          },
-          messages: {
-            ...app.messages,
-            send: null,
-          },
-        },
-      }
-    }
-    case AppActions.RemoveSendOutput: {
-      /**
-       * payload: index of the output to be removed
-       */
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: { ...app.send, outputs: app.send.outputs.filter((_, idx) => idx !== payload) },
-          messages: {
-            ...app.messages,
-            send: null,
-          },
-        },
-      }
-    }
-    case AppActions.UpdateSendOutput: {
-      /**
-       * payload:{ idx, item: { address, capacity } }
-       */
-      const outputs = [...app.send.outputs]
-      outputs[payload.idx] = {
-        ...outputs[payload.idx],
-        ...payload.item,
-      }
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            outputs,
-          },
-          messages: {
-            ...app.messages,
-            send: null,
-          },
-        },
-      }
-    }
-    case AppActions.UpdateSendPrice: {
-      /**
-       * payload: new price
-       */
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            price: payload,
-          },
-        },
-      }
-    }
-    case AppActions.UpdateSendCycles: {
-      /**
-       * payload: new cycles
-       */
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            cycles: payload,
-          },
-        },
-      }
-    }
-    case AppActions.UpdateSendDescription: {
-      /**
-       * payload: new description
-       */
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: {
-            ...app.send,
-            description: payload,
-          },
-        },
-      }
-    }
-    case AppActions.ClearSendState: {
-      return {
-        ...state,
-        app: {
-          ...app,
-          send: initStates.app.send,
         },
       }
     }
@@ -483,15 +157,6 @@ export const reducer = (
             ...app.messages,
           },
           notifications: [],
-        },
-      }
-    }
-    case AppActions.CleanTransactions: {
-      return {
-        ...state,
-        chain: {
-          ...chain,
-          transactions: initStates.chain.transactions,
         },
       }
     }

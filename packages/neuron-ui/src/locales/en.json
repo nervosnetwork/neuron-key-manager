@@ -39,8 +39,8 @@
       "more": "More activities"
     },
     "wizard": {
-      "welcome-to-nervos-neuron": "Welcome to Neuron",
-      "create-or-import-your-first-wallet": "Create or import your first wallet",
+      "welcome-to-nervos-neuron": "Welcome to Neuron Key Manager",
+      "create-or-import-your-first-wallet": "Create or import your wallet",
       "create-new-wallet": "Create a Wallet",
       "import-mnemonic": "Import Wallet Seed",
       "import-keystore": "Import from Keystore",

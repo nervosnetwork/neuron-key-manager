@@ -3,43 +3,18 @@ import { getNeuronWalletState } from 'services/remote'
 import initStates from 'states/initStates'
 import { Routes, ErrorCode } from 'utils/const'
 import { WalletWizardPath } from 'components/WalletWizard'
-import { addressesToBalance } from 'utils/formatters'
-import {
-  wallets as walletsCache,
-  addresses as addressesCache,
-  currentWallet as currentWalletCache,
-  currentNetworkID as currentNetworkIDCache,
-  networks as networksCache,
-} from 'services/localCache'
+import { wallets as walletsCache, currentWallet as currentWalletCache } from 'services/localCache'
 
 export const initAppState = () => (dispatch: StateDispatch, history: any) => {
   getNeuronWalletState()
     .then(res => {
       if (res.status) {
-        const {
-          wallets = [],
-          currentWallet: wallet = initStates.wallet,
-          addresses = [],
-          transactions = initStates.chain.transactions,
-          networks = [],
-          currentNetworkID = '',
-          syncedBlockNumber = '',
-          connectionStatus = false,
-          codeHash = '',
-          skipDataAndType = false,
-        } = res.result
+        const { wallets = [], currentWallet: wallet = initStates.wallet, addresses = [] } = res.result
         dispatch({
           type: NeuronWalletActions.InitAppState,
           payload: {
-            wallet: { ...wallet, balance: addressesToBalance(addresses), addresses },
+            wallet: { ...wallet, balance: 0, addresses },
             wallets,
-            transactions,
-            networks,
-            currentNetworkID,
-            syncedBlockNumber,
-            connectionStatus,
-            codeHash,
-            skipDataAndType,
           },
         })
         if (!wallet) {
@@ -50,9 +25,6 @@ export const initAppState = () => (dispatch: StateDispatch, history: any) => {
 
         currentWalletCache.save(wallet)
         walletsCache.save(wallets)
-        addressesCache.save(addresses)
-        networksCache.save(networks)
-        currentNetworkIDCache.save(currentNetworkID)
       } else {
         history.push(`${Routes.WalletWizard}${WalletWizardPath.Welcome}`)
       }

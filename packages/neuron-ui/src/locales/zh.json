@@ -39,8 +39,8 @@
       "more": "查看更多记录"
     },
     "wizard": {
-      "welcome-to-nervos-neuron": "欢迎使用 Neuron",
-      "create-or-import-your-first-wallet": "创建或导入您的第一个钱包",
+      "welcome-to-nervos-neuron": "欢迎使用 Neuron Key Manager",
+      "create-or-import-your-first-wallet": "创建或导入一个钱包",
       "create-new-wallet": "创建新钱包",
       "import-mnemonic": "导入助记词",
       "import-keystore": "导入 Keystore 文件",

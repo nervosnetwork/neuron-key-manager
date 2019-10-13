@@ -7,12 +7,10 @@ import { deleteWallet, backupWallet } from 'states/stateProvider/actionCreators'
 
 const PasswordRequest = ({
   app: {
-    send: { txID, outputs, description, price, cycles },
     loadings: { sending: isSending = false },
     passwordRequest: { walletID = '', actionType = null, password = '' },
   },
   settings: { wallets = [] },
-  history,
   dispatch,
 }: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps>) => {
   const [t] = useTranslation()
@@ -44,7 +42,7 @@ const PasswordRequest = ({
         break
       }
     }
-  }, [dispatch, walletID, password, actionType, txID, description, outputs, cycles, price, history, isSending])
+  }, [dispatch, walletID, password, actionType])
 
   const onChange = useCallback(
     (_e, value?: string) => {

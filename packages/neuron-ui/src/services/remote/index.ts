@@ -1,6 +1,5 @@
 export * from './app'
 export * from './wallets'
-export * from './networks'
 
 export const getLocale = () => {
   if (!window.remote) {

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Route, RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +13,7 @@ import PasswordRequest from 'components/PasswordRequest'
 
 import { Routes } from 'utils/const'
 
-import { useSubscription, useSyncChainData, useOnCurrentWalletChange } from './hooks'
+import { useSubscription, useOnCurrentWalletChange } from './hooks'
 
 export const mainContents: CustomRouter.Route[] = [
   {
@@ -55,39 +55,13 @@ const MainContent = ({
 }: React.PropsWithoutRef<{ dispatch: StateDispatch } & RouteComponentProps>) => {
   const neuronWalletState = useState()
   const {
-    app: { isAllowedToFetchList = true },
     wallet: { id: walletID = '' },
-    chain,
-    settings: { networks = [] },
   } = neuronWalletState
-  const { networkID } = chain
   const [, i18n] = useTranslation()
 
-  useSubscription({
-    walletID,
-    chain,
-    isAllowedToFetchList,
-    history,
-    dispatch,
-  })
+  useSubscription({ walletID, history, dispatch })
 
-  const chainURL = useMemo(() => {
-    const network = networks.find(n => n.id === networkID)
-    return network ? network.remote : ''
-  }, [networks, networkID])
-
-  useSyncChainData({
-    chainURL,
-    dispatch,
-  })
-
-  useOnCurrentWalletChange({
-    walletID,
-    chain,
-    i18n,
-    history,
-    dispatch,
-  })
+  useOnCurrentWalletChange({ walletID, i18n, history, dispatch })
 
   return (
     <>

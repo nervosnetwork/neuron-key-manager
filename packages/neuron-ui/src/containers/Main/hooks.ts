@@ -1,91 +1,10 @@
 import { useEffect } from 'react'
 
-import { NeuronWalletActions, StateDispatch, AppActions } from 'states/stateProvider/reducer'
+import { StateDispatch, AppActions } from 'states/stateProvider/reducer'
 import { updateCurrentWallet, updateWalletList, initAppState } from 'states/stateProvider/actionCreators'
 
 import { getWinID } from 'services/remote'
-import {
-  SystemScript as SystemScriptSubject,
-  DataUpdate as DataUpdateSubject,
-  NetworkList as NetworkListSubject,
-  CurrentNetworkID as CurrentNetworkIDSubject,
-  ConnectionStatus as ConnectionStatusSubject,
-  SyncedBlockNumber as SyncedBlockNumberSubject,
-  Command as CommandSubject,
-} from 'services/subjects'
-import { ckbCore, getTipBlockNumber, getBlockchainInfo } from 'services/chain'
-import { ConnectionStatus } from 'utils/const'
-import {
-  networks as networksCache,
-  currentNetworkID as currentNetworkIDCache,
-  systemScript as systemScriptCache,
-} from 'services/localCache'
-
-let timer: NodeJS.Timeout
-const SYNC_INTERVAL_TIME = 10000
-
-export const useSyncChainData = ({ chainURL, dispatch }: { chainURL: string; dispatch: StateDispatch }) => {
-  useEffect(() => {
-    const syncTipNumber = () =>
-      getTipBlockNumber()
-        .then(tipBlockNumber => {
-          dispatch({
-            type: AppActions.UpdateTipBlockNumber,
-            payload: BigInt(tipBlockNumber).toString(),
-          })
-        })
-        .catch((err: Error) => {
-          if (process.env.NODE_ENV === 'development') {
-            console.error(err)
-          }
-        })
-
-    const syncBlockchainInfo = () => {
-      getBlockchainInfo()
-        .then(info => {
-          if (info) {
-            const { chain = '', difficulty: difficultyHex = '', epoch: epochHex = '', alerts = [] } = info
-            const difficulty = BigInt(difficultyHex).toString()
-            const epoch = BigInt(epochHex).toString()
-            if (alerts.length) {
-              alerts.forEach(a => {
-                // TODO: display alerts in Notification
-                console.info(a)
-              })
-            }
-            dispatch({
-              type: AppActions.UpdateChainInfo,
-              payload: {
-                chain,
-                difficulty,
-                epoch,
-              },
-            })
-          }
-        })
-        .catch((err: Error) => {
-          if (process.env.NODE_ENV === 'development') {
-            console.warn(err)
-          }
-        })
-    }
-    clearInterval(timer)
-    if (chainURL) {
-      ckbCore.setNode(chainURL)
-      syncTipNumber()
-      syncBlockchainInfo()
-      timer = setInterval(() => {
-        syncTipNumber()
-        syncBlockchainInfo()
-      }, SYNC_INTERVAL_TIME)
-    } else {
-      ckbCore.setNode('')
-    }
-    return () => {
-      clearInterval(timer)
-    }
-  }, [chainURL, dispatch])
-}
+import { DataUpdate as DataUpdateSubject, Command as CommandSubject } from 'services/subjects'
 
 export const useOnCurrentWalletChange = ({
   walletID,
@@ -93,7 +12,6 @@ export const useOnCurrentWalletChange = ({
   dispatch,
 }: {
   walletID: string
-  chain: State.Chain
   i18n: any
   history: any
 
@@ -110,35 +28,20 @@ export const useOnCurrentWalletChange = ({
 
 export const useSubscription = ({
   walletID,
-  chain,
-  isAllowedToFetchList,
   history,
   dispatch,
 }: {
   walletID: string
-  chain: State.Chain
-  isAllowedToFetchList: boolean
   history: any
   dispatch: StateDispatch
 }) => {
-  const { pageNo, pageSize, keywords } = chain.transactions
   useEffect(() => {
-    const systemScriptSubscription = SystemScriptSubject.subscribe(({ codeHash = '' }: { codeHash: string }) => {
-      systemScriptCache.save({ codeHash })
-      dispatch({
-        type: NeuronWalletActions.UpdateCodeHash,
-        payload: codeHash,
-      })
-    })
     const dataUpdateSubscription = DataUpdateSubject.subscribe(({ dataType, walletID: walletIDOfMessage }: any) => {
       if (walletIDOfMessage && walletIDOfMessage !== walletID) {
         return
       }
       switch (dataType) {
         case 'address': {
-          if (!isAllowedToFetchList) {
-            break
-          }
           break
         }
         case 'current-wallet': {
@@ -154,33 +57,6 @@ export const useSubscription = ({
           break
         }
       }
-    })
-    const networkListSubscription = NetworkListSubject.subscribe((currentNetworkList = []) => {
-      dispatch({
-        type: NeuronWalletActions.UpdateNetworkList,
-        payload: currentNetworkList,
-      })
-      networksCache.save(currentNetworkList)
-    })
-    const currentNetworkIDSubscription = CurrentNetworkIDSubject.subscribe((currentNetworkID = '') => {
-      dispatch({
-        type: NeuronWalletActions.UpdateCurrentNetworkID,
-        payload: currentNetworkID,
-      })
-      currentNetworkIDCache.save(currentNetworkID)
-    })
-    const connectionStatusSubscription = ConnectionStatusSubject.subscribe(status => {
-      dispatch({
-        type: NeuronWalletActions.UpdateConnectionStatus,
-        payload: status ? ConnectionStatus.Online : ConnectionStatus.Offline,
-      })
-    })
-
-    const syncedBlockNumberSubscription = SyncedBlockNumberSubject.subscribe(syncedBlockNumber => {
-      dispatch({
-        type: NeuronWalletActions.UpdateSyncedBlockNumber,
-        payload: syncedBlockNumber,
-      })
     })
 
     const commandSubscription = CommandSubject.subscribe(({ winID, type, payload }: Subject.CommandMetaInfo) => {
@@ -217,19 +93,13 @@ export const useSubscription = ({
       }
     })
     return () => {
-      systemScriptSubscription.unsubscribe()
       dataUpdateSubscription.unsubscribe()
-      networkListSubscription.unsubscribe()
-      currentNetworkIDSubscription.unsubscribe()
-      connectionStatusSubscription.unsubscribe()
-      syncedBlockNumberSubscription.unsubscribe()
       commandSubscription.unsubscribe()
     }
-  }, [walletID, pageNo, pageSize, keywords, isAllowedToFetchList, history, dispatch])
+  }, [walletID, history, dispatch])
 }
 
 export default {
-  useSyncChainData,
   useOnCurrentWalletChange,
   useSubscription,
 }
