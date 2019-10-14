@@ -24,7 +24,6 @@ export enum Routes {
   CreateWallet = '/wallets/new',
   ImportWallet = '/wallets/import',
   ImportKeystore = '/keystore/import',
-  WalletEditor = '/editwallet',
   Prompt = '/prompt',
 }
 
@@ -46,7 +45,7 @@ export enum MnemonicAction {
   Import = 'import',
 }
 
-export const FULL_SCREENS = [`/wizard/`, `/keystore/`, `${Routes.WalletEditor}/`]
+export const FULL_SCREENS = [`/wizard/`, `/keystore/`]
 
 export enum ErrorCode {
   // Errors from RPC
