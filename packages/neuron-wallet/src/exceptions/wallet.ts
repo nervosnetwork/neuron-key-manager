@@ -23,24 +23,6 @@ export class EmptyPassword extends Error {
   }
 }
 
-export class CodeHashNotLoaded extends Error {
-  constructor() {
-    super(i18n.t('messages.codehash-not-loaded'))
-  }
-}
-
-export class CapacityNotEnough extends Error {
-  constructor() {
-    super(i18n.t('messages.capacity-not-enough'))
-  }
-}
-
-export class CapacityNotEnoughForChange extends Error {
-  constructor() {
-    super(i18n.t('messages.capacity-not-enough-for-change'))
-  }
-}
-
 export class InvalidKeystore extends Error {
   constructor() {
     super(i18n.t('messages.invalid-keystore'))
@@ -52,8 +34,5 @@ export default {
   CurrentWalletNotSet,
   IncorrectPassword,
   EmptyPassword,
-  CodeHashNotLoaded,
-  CapacityNotEnough,
-  CapacityNotEnoughForChange,
   InvalidKeystore,
 }

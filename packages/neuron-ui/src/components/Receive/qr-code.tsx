@@ -131,7 +131,7 @@ const QRCode = ({
   const onCopy = useCallback(() => {
     window.navigator.clipboard.writeText(value)
     addPopup('qrcode-copied')(dispatch)
-  }, [dispatch])
+  }, [value, dispatch])
 
   useEffect(() => {
     if (canvasRef.current !== null) {

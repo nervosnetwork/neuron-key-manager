@@ -8,8 +8,8 @@ export enum ResponseCode {
 
 export enum ExternalURL {
   Website = 'https://www.nervos.org/',
-  Repository = 'https://github.com/nervosnetwork/neuron',
-  Issues = 'https://github.com/nervosnetwork/neuron/issues',
+  Repository = 'https://github.com/nervosnetwork/neuron-key-manager',
+  Issues = 'https://github.com/nervosnetwork/neuron-key-manager/issues',
 }
 
 export default {
