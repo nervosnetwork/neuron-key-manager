@@ -1799,23 +1799,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nervosnetwork/ckb-sdk-core@0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@nervosnetwork/ckb-sdk-core/-/ckb-sdk-core-0.22.0.tgz#dc4e93d425154e0dfeb40c08932095c0b99b8947"
-  integrity sha512-HKFFD4L3tK5yWsVSPn0t5qc+NZ35wmoEpd2q5wJtTt8rpLb0n1lJKKk8MQCRhWLR9a8UPskISrLDLyI2uQ7Q8Q==
-  dependencies:
-    "@nervosnetwork/ckb-sdk-rpc" "0.22.0"
-    "@nervosnetwork/ckb-sdk-utils" "0.22.0"
-    "@nervosnetwork/ckb-types" "0.22.0"
-
-"@nervosnetwork/ckb-sdk-rpc@0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@nervosnetwork/ckb-sdk-rpc/-/ckb-sdk-rpc-0.22.0.tgz#f5a4b8459941fed110505b92fa94014d8853073b"
-  integrity sha512-auc2RqktbvQqyn8LcTnLVjgAMXIm1C0zLIHEEltngXQbZA5YeLXfJnC0RSSvpwloThgFpuKPvTy19b2/N9YzNg==
-  dependencies:
-    "@nervosnetwork/ckb-sdk-utils" "0.22.0"
-    axios "0.19.0"
-
 "@nervosnetwork/ckb-sdk-utils@0.22.0":
   version "0.22.0"
   resolved "https://registry.yarnpkg.com/@nervosnetwork/ckb-sdk-utils/-/ckb-sdk-utils-0.22.0.tgz#94a0e03cec53ff6bfe4664e9afc4d84a0e01ee77"
