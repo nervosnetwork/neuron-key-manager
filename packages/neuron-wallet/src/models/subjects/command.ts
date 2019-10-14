@@ -3,7 +3,7 @@ import WindowManager from 'models/window-manager'
 
 const CommandSubject = new Subject<{
   winID: number
-  type: 'nav' | 'toggle-address-book' | 'delete-wallet' | 'backup-wallet'
+  type: 'nav' | 'delete-wallet' | 'backup-wallet'
   payload: string | null
 }>()
 

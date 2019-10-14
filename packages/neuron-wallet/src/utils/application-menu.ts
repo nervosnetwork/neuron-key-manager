@@ -1,4 +1,4 @@
-import { Menu, MenuItem, MenuItemConstructorOptions } from 'electron'
+import { Menu, MenuItemConstructorOptions } from 'electron'
 import app from 'app'
 import env from 'env'
 import i18n from 'utils/i18n'
@@ -31,17 +31,6 @@ const generateTemplate = () => {
       },
       separator,
       {
-        id: 'preference',
-        label: i18n.t('application-menu.neuron.preferences'),
-        accelerator: 'CmdOrCtrl+,',
-        click: () => {
-          if (AppController) {
-            AppController.showPreference()
-          }
-        },
-      },
-      separator,
-      {
         label: i18n.t('application-menu.neuron.quit', {
           app: app.getName(),
         }),
@@ -54,41 +43,6 @@ const generateTemplate = () => {
     id: 'wallet',
     label: i18n.t('application-menu.wallet.label'),
     submenu: [
-      { id: 'select', label: i18n.t('application-menu.wallet.select'), submenu: [] },
-      {
-        id: 'create',
-        label: i18n.t('application-menu.wallet.create-new'),
-        click: () => {
-          if (AppController) {
-            AppController.createWallet()
-          }
-        },
-      },
-      {
-        id: 'import',
-        label: i18n.t('application-menu.wallet.import'),
-        submenu: [
-          {
-            id: 'import-with-mnemonic',
-            label: i18n.t('application-menu.wallet.import-mnemonic'),
-            click: () => {
-              if (AppController) {
-                AppController.importWallet('mnemonic')
-              }
-            },
-          },
-          {
-            id: 'import-with-keystore',
-            label: i18n.t('application-menu.wallet.import-keystore'),
-            click: () => {
-              if (AppController) {
-                AppController.importWallet('keystore')
-              }
-            },
-          },
-        ],
-      },
-      separator,
       {
         id: 'backup',
         label: i18n.t('application-menu.wallet.backup'),
@@ -150,15 +104,6 @@ const generateTemplate = () => {
         label: i18n.t('application-menu.view.fullscreen'),
         role: 'togglefullscreen',
       },
-      {
-        label: i18n.t('application-menu.view.address-book'),
-        click: () => {
-          if (AppController) {
-            AppController.toggleAddressBook()
-          }
-        },
-        accelerator: 'CmdOrCtrl+B',
-      },
     ],
   }
 
@@ -205,15 +150,6 @@ const generateTemplate = () => {
   ]
   if (!isMac) {
     helpSubmenu.push(separator)
-    helpSubmenu.push({
-      id: 'preference',
-      label: i18n.t('application-menu.help.settings'),
-      click: () => {
-        if (AppController) {
-          AppController.showPreference()
-        }
-      },
-    })
     helpSubmenu.push({
       id: 'about',
       label: i18n.t('application-menu.neuron.about', {
@@ -264,25 +200,8 @@ const generateTemplate = () => {
   return applicationMenuTemplate
 }
 
-export const updateApplicationMenu = (wallets: Controller.Wallet[], id: string | null) => {
+export const updateApplicationMenu = () => {
   const applicationMenu = Menu.buildFromTemplate(generateTemplate())
-  const selectMenu = applicationMenu.getMenuItemById('select')
-
-  wallets.forEach(wallet => {
-    selectMenu.submenu.append(
-      new MenuItem({
-        id: wallet.id,
-        label: wallet.name,
-        type: 'radio',
-        checked: wallet.id === id,
-        click: () => {
-          const walletsService = WalletsService.getInstance()
-          walletsService.setCurrent(wallet.id)
-        },
-      })
-    )
-  })
-
   Menu.setApplicationMenu(applicationMenu)
 }
 

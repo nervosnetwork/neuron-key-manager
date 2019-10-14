@@ -1,10 +1,5 @@
 import { Not, In } from 'typeorm'
 import { AddressType } from 'models/keys/address'
-import { TransactionsService } from 'services/tx'
-import CellsService from 'services/cells'
-import LockUtils from 'models/lock-utils'
-import { TransactionStatus } from 'types/cell-types'
-import { OutputStatus } from 'services/tx/params'
 import AddressEntity, { AddressVersion } from './entities/address'
 import { getConnection } from './ormconfig'
 
@@ -47,13 +42,6 @@ export default class AddressDao {
     return getConnection().manager.save(addressEntities)
   }
 
-  // txCount include all txs in db
-  // liveBalance means balance of OutputStatus.Live cells (already in chain and not spent)
-  // sentBalance means balance of OutputStatus.Sent cells (sent to me but not committed)
-  // pendingBalance means balance of OutputStatus.Pending cells (sent from me, but not committed)
-  // so the final balance is (liveBalance + sentBalance - pendingBalance)
-  // balance is the balance of the cells those who don't hold data or type script
-  // totalBalance means balance of all cells, including those who hold data and type script
   public static updateTxCountAndBalance = async (address: string): Promise<AddressEntity[]> => {
     const addressEntities = await getConnection()
       .getRepository(AddressEntity)
@@ -61,21 +49,15 @@ export default class AddressDao {
         address,
       })
 
-    const txCount: number = await TransactionsService.getCountByAddressAndStatus(address, [
-      TransactionStatus.Pending,
-      TransactionStatus.Success,
-    ])
+    const txCount: number = 0
     const entities = await Promise.all(
       addressEntities.map(async entity => {
         const addressEntity = entity
         addressEntity.txCount = txCount
-        const lockHashes: string[] = await LockUtils.addressToAllLockHashes(addressEntity.address)
-        addressEntity.liveBalance = await CellsService.getBalance(lockHashes, OutputStatus.Live, true)
-        addressEntity.sentBalance = await CellsService.getBalance(lockHashes, OutputStatus.Sent, true)
-        addressEntity.pendingBalance = await CellsService.getBalance(lockHashes, OutputStatus.Pending, true)
-        const totalLiveBalance = await CellsService.getBalance(lockHashes, OutputStatus.Live, false)
-        const totalSentBalance = await CellsService.getBalance(lockHashes, OutputStatus.Sent, false)
-        addressEntity.totalBalance = (BigInt(totalLiveBalance) - BigInt(totalSentBalance)).toString()
+        addressEntity.liveBalance = "0"
+        addressEntity.sentBalance = "0"
+        addressEntity.pendingBalance = "0"
+        addressEntity.totalBalance = "0"
         return addressEntity
       })
     )
@@ -211,23 +193,6 @@ export default class AddressDao {
     }
 
     return addressEntity
-  }
-
-  public static updateDescription = async (walletId: string, address: string, description: string) => {
-    const addressEntity = await getConnection()
-      .getRepository(AddressEntity)
-      .createQueryBuilder('address')
-      .where({
-        walletId,
-        address,
-      })
-      .getOne()
-
-    if (!addressEntity) {
-      return undefined
-    }
-    addressEntity.description = description
-    return getConnection().manager.save(addressEntity)
   }
 
   public static deleteByWalletId = async (walletId: string) => {

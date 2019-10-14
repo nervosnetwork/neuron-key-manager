@@ -21,7 +21,6 @@ import {
 import i18n from 'utils/i18n'
 import AddressService from 'services/addresses'
 import WalletCreatedSubject from 'models/subjects/wallet-created-subject'
-import logger from 'utils/logger'
 
 /**
  * @class WalletsController
@@ -353,88 +352,6 @@ export default class WalletsController {
     return {
       status: ResponseCode.Success,
       result: addresses,
-    }
-  }
-
-  @CatchControllerError
-  public static async sendCapacity(params: {
-    id: string
-    walletID: string
-    items: {
-      address: string
-      capacity: string
-    }[]
-    password: string
-    fee: string
-    description?: string
-  }) {
-    if (!params) {
-      throw new IsRequired('Parameters')
-    }
-    try {
-      const walletsService = WalletsService.getInstance()
-      const hash = await walletsService.sendCapacity(
-        params.walletID,
-        params.items,
-        params.password,
-        params.fee,
-        params.description
-      )
-      return {
-        status: ResponseCode.Success,
-        result: hash,
-      }
-    } catch (err) {
-      logger.error(`sendCapacity:`, err)
-      return {
-        status: ResponseCode.Fail,
-        message: `Error: "${err.message}"`,
-      }
-    }
-  }
-
-  @CatchControllerError
-  public static async computeCycles(params: { walletID: string; capacities: string }) {
-    if (!params) {
-      throw new IsRequired('Parameters')
-    }
-    try {
-      const walletsService = WalletsService.getInstance()
-      const cycles = await walletsService.computeCycles(params.walletID, params.capacities)
-      return {
-        status: ResponseCode.Success,
-        result: cycles,
-      }
-    } catch (err) {
-      return {
-        status: ResponseCode.Fail,
-        message: `Error: "${err.message}"`,
-      }
-    }
-  }
-
-  @CatchControllerError
-  public static async updateAddressDescription({
-    walletID,
-    address,
-    description,
-  }: {
-    walletID: string
-    address: string
-    description: string
-  }) {
-    const walletService = WalletsService.getInstance()
-    const wallet = walletService.get(walletID)
-
-    await AddressService.updateDescription(wallet.id, address, description)
-
-    return {
-      status: ResponseCode.Success,
-      result: {
-        walletID,
-        address,
-        description,
-      },
     }
   }
 }

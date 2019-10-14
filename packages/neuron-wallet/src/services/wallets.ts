@@ -3,34 +3,22 @@ import { debounceTime } from 'rxjs/operators'
 import { AccountExtendedPublicKey, PathAndPrivateKey } from 'models/keys/key'
 import Keystore from 'models/keys/keystore'
 import Store from 'models/store'
-import LockUtils from 'models/lock-utils'
-import { TransactionWithoutHash, Input } from 'types/cell-types'
-import ConvertTo from 'types/convert-to'
 import { WalletNotFound, IsRequired, UsedName } from 'exceptions'
 import { Address as AddressInterface } from 'database/address/dao'
 import Keychain from 'models/keys/keychain'
 import AddressDbChangedSubject from 'models/subjects/address-db-changed-subject'
-import AddressesUsedSubject from 'models/subjects/addresses-used-subject'
 import { WalletListSubject, CurrentWalletSubject } from 'models/subjects/wallets'
 import dataUpdateSubject from 'models/subjects/data-update'
 import CommandSubject from 'models/subjects/command'
 import WindowManager from 'models/window-manager'
-import CellsService from 'services/cells'
-import { AddressPrefix } from '@nervosnetwork/ckb-sdk-utils'
-import env from 'env'
 
-import NodeService from './node'
 import FileService from './file'
-import { TransactionsService, TransactionPersistor, TransactionGenerator } from './tx'
 import AddressService from './addresses'
-import { deindexLockHashes } from './indexer/deindex'
 
-const { core } = NodeService.getInstance()
 const fileService = FileService.getInstance()
 
 const MODULE_NAME = 'wallets'
 const DEBOUNCE_TIME = 200
-const SECP_CYCLES = BigInt('1440000')
 
 export interface Wallet {
   id: string
@@ -265,29 +253,6 @@ export default class WalletService {
 
     this.listStore.writeSync(this.walletsKey, newWallets)
     wallet.deleteKeystore()
-    const addressInterfaces = await AddressService.deleteByWalletId(id)
-    this.deindexAddresses(addressInterfaces.map(addr => addr.address))
-  }
-
-  private deindexAddresses = async (addresses: string[]) => {
-    const prefix = env.testnet ? AddressPrefix.Testnet : AddressPrefix.Mainnet
-    const addressesWithEnvPrefix: string[] = addresses.filter(addr => addr.startsWith(prefix))
-
-    if (addressesWithEnvPrefix.length === 0) {
-      return
-    }
-    const addrs: string[] = (await AddressService.findByAddresses(addressesWithEnvPrefix)).map(addr => addr.address)
-    const deindexAddresses: string[] = addresses.filter(item => addrs.indexOf(item) < 0);
-    // only deindex if no same wallet
-    if (deindexAddresses.length !== 0) {
-      const lockHashes: string[] = await Promise.all(
-        deindexAddresses.map(async address => {
-          return LockUtils.addressToLockHash(address)
-        })
-      )
-      // don't await
-      deindexLockHashes(lockHashes)
-    }
   }
 
   public setCurrent = (id: string) => {
@@ -330,102 +295,6 @@ export default class WalletService {
     this.listStore.clear()
   }
 
-  public sendCapacity = async (
-    walletID: string = '',
-    items: {
-      address: string
-      capacity: string
-    }[] = [],
-    password: string = '',
-    fee: string = '0',
-    description: string = ''
-  ) => {
-    const wallet = await this.get(walletID)
-    if (!wallet) {
-      throw new WalletNotFound(walletID)
-    }
-
-    if (password === '') {
-      throw new IsRequired('Password')
-    }
-
-    const addressInfos = await this.getAddressInfos(walletID)
-
-    const addresses: string[] = addressInfos.map(info => info.address)
-
-    const lockHashes: string[] = await LockUtils.addressesToAllLockHashes(addresses)
-
-    const targetOutputs = items.map(item => ({
-      ...item,
-      capacity: BigInt(item.capacity).toString(),
-    }))
-
-    const changeAddress: string = await this.getChangeAddress()
-
-    const tx: TransactionWithoutHash = await TransactionGenerator.generateTx(
-      lockHashes,
-      targetOutputs,
-      changeAddress,
-      fee
-    )
-
-    let txHash: string = core.utils.rawTransactionToHash(ConvertTo.toSdkTxWithoutHash(tx))
-    if (!txHash.startsWith('0x')) {
-      txHash = `0x${txHash}`
-    }
-
-    const { inputs } = tx
-
-    const paths = addressInfos.map(info => info.path)
-    const pathAndPrivateKeys = this.getPrivateKeys(wallet, paths, password)
-
-    const witnesses: string[] = inputs!.map((input: Input) => {
-      const blake160: string = input.lock!.args!
-      const info = addressInfos.find(i => i.blake160 === blake160)
-      const { path } = info!
-      const pathAndPrivateKey = pathAndPrivateKeys.find(p => p.path === path)
-      if (!pathAndPrivateKey) {
-        throw new Error('no private key found')
-      }
-      const { privateKey } = pathAndPrivateKey
-      const witness = this.signWitness('', privateKey, txHash)
-      return witness
-    })
-
-    tx.witnesses = witnesses
-
-    const txToSend = ConvertTo.toSdkTxWithoutHash(tx)
-    await core.rpc.sendTransaction(txToSend)
-
-    tx.description = description
-    await TransactionPersistor.saveSentTx(tx, txHash)
-
-    // update addresses txCount and balance
-    const blake160s = TransactionsService.blake160sOfTx(tx)
-    const usedAddresses = blake160s.map(blake160 => LockUtils.blake160ToAddress(blake160))
-    AddressesUsedSubject.getSubject().next(usedAddresses)
-
-    return txHash
-  }
-
-  public computeCycles = async (walletID: string = '', capacities: string): Promise<string> => {
-    const wallet = await this.get(walletID)
-    if (!wallet) {
-      throw new WalletNotFound(walletID)
-    }
-
-    const addressInfos = await this.getAddressInfos(walletID)
-
-    const addresses: string[] = addressInfos.map(info => info.address)
-
-    const lockHashes: string[] = await LockUtils.addressesToAllLockHashes(addresses)
-
-    const { inputs } = await CellsService.gatherInputs(capacities, lockHashes, '0')
-    const cycles = SECP_CYCLES * BigInt(inputs.length)
-
-    return cycles.toString()
-  }
-
   // path is a BIP44 full path such as "m/44'/309'/0'/0/0"
   public getAddressInfos = async (walletID: string): Promise<AddressInterface[]> => {
     const wallet = await this.get(walletID)
@@ -440,13 +309,6 @@ export default class WalletService {
     const walletId = this.getCurrent()!.id
     const addr = await AddressService.nextUnusedChangeAddress(walletId)
     return addr!.address
-  }
-
-  public signWitness = (witness: string, privateKey: string, txHash: string): string => {
-    return core.signWitnesses(privateKey)({
-      transactionHash: txHash,
-      witnesses: [witness]
-    })[0]
   }
 
   // Derivate all child private keys for specified BIP44 paths.
