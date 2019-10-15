@@ -8,9 +8,6 @@ export const getNeuronWalletState = controllerMethodWrapper(CONTROLLER_NAME)(con
 export const handleViewError = controllerMethodWrapper(CONTROLLER_NAME)(controller => (errorMessage: string) =>
   controller.handleViewError(errorMessage)
 )
-export const contextMenu = controllerMethodWrapper(CONTROLLER_NAME)(
-  controller => (params: { type: string; id: string }) => controller.contextMenu(params)
-)
 
 export const isMainWindow = controllerMethodWrapper(CONTROLLER_NAME)(controller => (winID: number) =>
   controller.isMainWindow(winID)
@@ -19,6 +16,5 @@ export const isMainWindow = controllerMethodWrapper(CONTROLLER_NAME)(controller 
 export default {
   getNeuronWalletState,
   handleViewError,
-  contextMenu,
   isMainWindow,
 }

@@ -87,7 +87,6 @@ declare namespace State {
   interface WalletIdentity {
     id: string
     name: string
-    minerAddress?: { address: string; identifier: string }
   }
 
   interface Address {
@@ -101,8 +100,7 @@ declare namespace State {
   }
 
   interface Wallet extends WalletIdentity {
-    balance: string
-    addresses: Address[]
+    address: string
   }
 
   interface Settings {

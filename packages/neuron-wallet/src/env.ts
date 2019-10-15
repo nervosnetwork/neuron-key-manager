@@ -20,7 +20,6 @@ interface ENV {
   isDevMode: boolean
   fileBasePath: string
   mainURL: string
-  remote: string
   testnet: boolean
   isTestMode: boolean
 }
@@ -28,7 +27,6 @@ const env: ENV = {
   isDevMode,
   fileBasePath: path.resolve(app.getPath('userData'), fileBase),
   mainURL: isDevMode ? 'http://localhost:3000' : `file://${path.join(__dirname, '../dist/neuron-ui/index.html')}`,
-  remote: 'http://localhost:8114',
   testnet: false,
   isTestMode,
 }

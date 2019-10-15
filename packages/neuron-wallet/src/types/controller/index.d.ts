@@ -25,13 +25,4 @@ declare module Controller {
     id: string
     name: string
   }
-
-  interface Address {
-    address: string
-    identifier: string
-    type: number
-    txCount: number
-    description: string
-    balance: string
-  }
 }

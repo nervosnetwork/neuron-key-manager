@@ -19,7 +19,6 @@ import {
   InvalidJSON,
 } from 'exceptions'
 import i18n from 'utils/i18n'
-import AddressService from 'services/addresses'
 import WalletCreatedSubject from 'models/subjects/wallet-created-subject'
 
 /**
@@ -34,25 +33,9 @@ export default class WalletsController {
     if (!wallets) {
       throw new ServiceHasNoResponse('Wallet')
     }
-    const minerAddresses = await Promise.all(
-      wallets.map(({ id }) =>
-        WalletsController.getAllAddresses(id).then(addrRes => {
-          if (addrRes.result) {
-            const minerAddr = addrRes.result.find(addr => addr.type === 0 && addr.index === 0)
-            if (minerAddr) {
-              return {
-                address: minerAddr.address,
-                identifier: minerAddr.identifier,
-              }
-            }
-          }
-          return undefined
-        })
-      )
-    )
     return {
       status: ResponseCode.Success,
-      result: wallets.map(({ name, id }, idx) => ({ name, id, minerAddress: minerAddresses[idx] })),
+      result: wallets.map(({ name, id }) => ({ name, id })),
     }
   }
 
@@ -87,7 +70,6 @@ export default class WalletsController {
       name,
       password,
       mnemonic,
-      isImporting: true,
     })
 
     WalletCreatedSubject.getSubject().next('import')
@@ -109,7 +91,6 @@ export default class WalletsController {
       name,
       password,
       mnemonic,
-      isImporting: false,
     })
 
     WalletCreatedSubject.getSubject().next('create')
@@ -121,12 +102,10 @@ export default class WalletsController {
     name,
     password,
     mnemonic,
-    isImporting,
   }: {
     name: string
     password: string
     mnemonic: string
-    isImporting: boolean
   }): Promise<Controller.Response<Omit<WalletProperties, 'extendedKey'>>> {
     if (!validateMnemonic(mnemonic)) {
       throw new InvalidMnemonic()
@@ -150,20 +129,21 @@ export default class WalletsController {
     )
 
     const walletsService = WalletsService.getInstance()
+    const address = walletsService.generateAddress(accountExtendedPublicKey)
     const wallet = walletsService.create({
       id: '',
       name,
+      address,
       extendedKey: accountExtendedPublicKey.serialize(),
       keystore,
     })
-
-    await walletsService.generateAddressesById(wallet.id, isImporting)
 
     return {
       status: ResponseCode.Success,
       result: {
         id: wallet.id,
         name: wallet.name,
+        address: wallet.address
       },
     }
   }
@@ -200,14 +180,15 @@ export default class WalletsController {
     )
 
     const walletsService = WalletsService.getInstance()
+    const address = walletsService.generateAddress(accountExtendedPublicKey)
     const wallet = walletsService.create({
       id: '',
       name,
+      address,
       extendedKey: accountExtendedPublicKey.serialize(),
       keystore: keystoreObject,
     })
 
-    await walletsService.generateAddressesById(wallet.id, true)
     WalletCreatedSubject.getSubject().next('import')
 
     return {
@@ -237,6 +218,7 @@ export default class WalletsController {
 
     const props = {
       name: name || wallet.name,
+      address: wallet.address,
       keystore: wallet.loadKeystore(),
     }
 
@@ -323,35 +305,6 @@ export default class WalletsController {
     return {
       status: ResponseCode.Success,
       result: currentWallet.toJSON(),
-    }
-  }
-
-  @CatchControllerError
-  public static async getAllAddresses(id: string) {
-    const addresses = await AddressService.allAddressesByWalletId(id).then(addrs =>
-      addrs.map(
-        ({
-          address,
-          blake160: identifier,
-          addressType: type,
-          txCount,
-          balance,
-          description = '',
-          addressIndex: index = '',
-        }) => ({
-          address,
-          identifier,
-          type,
-          txCount,
-          description,
-          balance,
-          index,
-        })
-      )
-    )
-    return {
-      status: ResponseCode.Success,
-      result: addresses,
     }
   }
 }

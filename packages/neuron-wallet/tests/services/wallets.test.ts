@@ -3,12 +3,10 @@ import Keystore from '../../src/models/keys/keystore'
 import Keychain from '../../src/models/keys/keychain'
 import { mnemonicToSeedSync } from '../../src/models/keys/mnemonic'
 import { ExtendedPrivateKey, AccountExtendedPublicKey } from '../../src/models/keys/key'
-import AddressService from '../../src/services/addresses'
 
 const mockDeleteAddressByWalletId = () => {
   const mockDeleteAddress = jest.fn()
   mockDeleteAddress.mockReturnValue(undefined)
-  AddressService.deleteByWalletId = mockDeleteAddress.bind(AddressService)
 }
 
 describe('wallet service', () => {
@@ -24,6 +22,7 @@ describe('wallet service', () => {
       name: 'wallet-test1',
       id: '',
       extendedKey: '',
+      address: '',
       keystore: new Keystore(
         {
           cipher: 'wallet1',
@@ -47,6 +46,7 @@ describe('wallet service', () => {
       name: 'wallet-test2',
       id: '',
       extendedKey: '',
+      address: '',
       keystore: new Keystore(
         {
           cipher: 'wallet2',
@@ -70,6 +70,7 @@ describe('wallet service', () => {
       name: 'wallet-test3',
       id: '',
       extendedKey: '',
+      address: '',
       keystore: new Keystore(
         {
           cipher: 'wallet3',
@@ -178,11 +179,8 @@ describe('get keys with paths', () => {
   const mnemonic = 'tank planet champion pottery together intact quick police asset flower sudden question'
   const password = '1234abc~'
   const receivingPath = `m/44'/309'/0'/0/0`
-  const changePath = `m/44'/309'/0'/1/0`
   const receivingPrivateKey = '0x848422863825f69e66dc7f48a3302459ec845395370c23578817456ad6b04b14'
   // const receivingPublicKey = '0x034dc074f2663d73aedd36f5fc2d1a1e4ec846a4dffa62d8d8bae8a4d6fffdf2b0'
-  const changePriateKey = '0x15ec3e9ba7024557a116f37f08a99ee7769882c2cb4cfabeced1662394279747'
-  // const changePublicKey = '03f3600eb8f2bd7675fd7763dbe3fc36a1103e45b46629860a88a374bcf015df03'
 
   it('get keys', () => {
     const seed = mnemonicToSeedSync(mnemonic)
@@ -205,20 +203,11 @@ describe('get keys with paths', () => {
       id: '',
       name: 'Test Wallet',
       extendedKey: accountExtendedPublicKey.serialize(),
+      address: '',
       keystore,
     })
 
     const masterPrivateKey = wallet.loadKeystore().extendedPrivateKey(password)
     expect(masterKeychain.privateKey.toString('hex')).toEqual(masterPrivateKey.privateKey)
-
-    const pathsAndKeys = walletService.getPrivateKeys(wallet, [receivingPath, changePath], password)
-    expect(pathsAndKeys[0]).toEqual({
-      path: receivingPath,
-      privateKey: receivingPrivateKey,
-    })
-    expect(pathsAndKeys[1]).toEqual({
-      path: changePath,
-      privateKey: changePriateKey,
-    })
   })
 })

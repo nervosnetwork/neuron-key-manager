@@ -1,7 +1,6 @@
 import {
   dialog,
   shell,
-  Menu,
   MessageBoxOptions,
   MessageBoxReturnValue,
   SaveDialogOptions,
@@ -10,14 +9,17 @@ import {
 import app from 'app'
 
 import WalletsService from 'services/wallets'
-import WalletsController from 'controllers/wallets'
 
 import { ResponseCode } from 'utils/const'
 import WindowManager from 'models/window-manager'
 import env from 'env'
 import CommandSubject from 'models/subjects/command'
 
-import { URL, contextMenuTemplate } from './options'
+enum URL {
+  CreateWallet = '/wizard/mnemonic/create',
+  ImportMnemonic = '/wizard/mnemonic/import',
+  ImportKeystore = '/keystore/import',
+}
 
 export default class AppController {
   public static getInitState = async () => {
@@ -30,15 +32,9 @@ export default class AppController {
       walletsService.getAll(),
     ])
 
-    const addresses: Controller.Address[] = await (currentWallet
-      ? WalletsController.getAllAddresses(currentWallet.id).then(res => res.result)
-      : [])
-
-
     const initState = {
       currentWallet,
       wallets: [...wallets.map(({ name, id }, idx: number) => ({ id, name, idx: idx }))],
-      addresses,
     }
 
     return { status: ResponseCode.Success, result: initState }
@@ -70,25 +66,6 @@ export default class AppController {
 
   public static openExternal(url: string) {
     shell.openExternal(url)
-  }
-
-  public static async contextMenu(params: { type: string; id: string }) {
-    if (!params || params.id === undefined) {
-      return
-    }
-    const { id, type } = params
-    switch (type) {
-      case 'copyMainnetAddress':
-      case 'walletList':
-      case 'addressList': {
-        const menu = Menu.buildFromTemplate(await contextMenuTemplate[type](id))
-        menu.popup()
-        break
-      }
-      default: {
-        break
-      }
-    }
   }
 
   public static showAbout() {

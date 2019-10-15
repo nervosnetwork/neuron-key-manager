@@ -13,21 +13,10 @@ afterSign: scripts/notarize.js
 files:
   - from: "../.."
     to: "."
-    filter: ["!**/*", "ormconfig.json", "ormconfig-address.json"]
   - package.json
   - dist
   - "!**/*.map"
   - "!**/src/"
-
-  - "!node_modules/chalk"
-  - "!node_modules/ansi-styles"
-  - "!node_modules/escape-string-regexp"
-  - from: "../../node_modules/chalk"
-    to: "node_modules/chalk"
-  - from: "../../node_modules/ansi-styles"
-    to: "node_modules/ansi-styles"
-  - from: "../../node_modules/escape-string-regexp"
-    to: "node_modules/escape-string-regexp"
 
 publish:
   - github
