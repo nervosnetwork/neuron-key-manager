@@ -1,11 +1,10 @@
 import { v4 as uuid } from 'uuid'
 import { debounceTime } from 'rxjs/operators'
-import { AccountExtendedPublicKey, PathAndPrivateKey } from 'models/keys/key'
+import { AccountExtendedPublicKey } from 'models/keys/key'
 import Keystore from 'models/keys/keystore'
 import Store from 'models/store'
 import { WalletNotFound, IsRequired, UsedName } from 'exceptions'
 import { Address as AddressInterface } from 'database/address/dao'
-import Keychain from 'models/keys/keychain'
 import AddressDbChangedSubject from 'models/subjects/address-db-changed-subject'
 import { WalletListSubject, CurrentWalletSubject } from 'models/subjects/wallets'
 import dataUpdateSubject from 'models/subjects/data-update'
@@ -157,33 +156,14 @@ export default class WalletService {
     return FileKeystoreWallet.fromJSON(wallet)
   }
 
-  public generateAddressesById = async (
-    id: string,
-    isImporting: boolean,
-    receivingAddressCount: number = 20,
-    changeAddressCount: number = 10
-  ) => {
+  public generateAddressesById = async (id: string, isImporting: boolean) => {
     const wallet: Wallet = this.get(id)
     const accountExtendedPublicKey: AccountExtendedPublicKey = wallet.accountExtendedPublicKey()
-    await AddressService.checkAndGenerateSave(
+    await AddressService.generateAndSave(
       id,
       accountExtendedPublicKey,
-      isImporting,
-      receivingAddressCount,
-      changeAddressCount
+      isImporting
     )
-  }
-
-  public generateCurrentWalletAddresses = async (
-    isImporting: boolean,
-    receivingAddressCount: number = 20,
-    changeAddressCount: number = 10
-  ) => {
-    const wallet: Wallet | undefined = this.getCurrent()
-    if (!wallet) {
-      return undefined
-    }
-    return this.generateAddressesById(wallet.id, isImporting, receivingAddressCount, changeAddressCount)
   }
 
   public create = (props: WalletProperties) => {
@@ -306,24 +286,7 @@ export default class WalletService {
   }
 
   public getChangeAddress = async (): Promise<string> => {
-    const walletId = this.getCurrent()!.id
-    const addr = await AddressService.nextUnusedChangeAddress(walletId)
-    return addr!.address
-  }
-
-  // Derivate all child private keys for specified BIP44 paths.
-  public getPrivateKeys = (wallet: Wallet, paths: string[], password: string): PathAndPrivateKey[] => {
-    const masterPrivateKey = wallet.loadKeystore().extendedPrivateKey(password)
-    const masterKeychain = new Keychain(
-      Buffer.from(masterPrivateKey.privateKey, 'hex'),
-      Buffer.from(masterPrivateKey.chainCode, 'hex')
-    )
-
-    const uniquePaths = paths.filter((value, idx, a) => a.indexOf(value) === idx)
-    return uniquePaths.map(path => ({
-      path,
-      privateKey: `0x${masterKeychain.derivePath(path).privateKey.toString('hex')}`,
-    }))
+    return ""
   }
 
   public requestPassword = (walletID: string, actionType: 'delete-wallet' | 'backup-wallet') => {
