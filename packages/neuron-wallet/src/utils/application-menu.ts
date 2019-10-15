@@ -70,6 +70,30 @@ const generateTemplate = () => {
     ],
   }
 
+  const editMenuItem: MenuItemConstructorOptions = {
+    id: 'edit',
+    label: i18n.t('application-menu.edit.label'),
+    submenu: [
+      {
+        label: i18n.t('application-menu.edit.cut'),
+        role: 'cut',
+      },
+      {
+        label: i18n.t('application-menu.edit.copy'),
+        role: 'copy',
+      },
+      {
+        label: i18n.t('application-menu.edit.paste'),
+        role: 'paste',
+      },
+      separator,
+      {
+        label: i18n.t('application-menu.edit.selectall'),
+        role: 'selectAll',
+      },
+    ],
+  }
+
   const viewMenuItem: MenuItemConstructorOptions = {
     id: 'view',
     label: i18n.t('application-menu.view.label'),
@@ -165,8 +189,8 @@ const generateTemplate = () => {
   }
 
   const applicationMenuTemplate = env.isDevMode
-    ? [walletMenuItem, viewMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
-    : [walletMenuItem, viewMenuItem, windowMenuItem, helpMenuItem]
+    ? [walletMenuItem, editMenuItem, viewMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
+    : [walletMenuItem, editMenuItem, viewMenuItem, windowMenuItem, helpMenuItem]
 
   if (isMac) {
     applicationMenuTemplate.unshift(appMenuItem)
