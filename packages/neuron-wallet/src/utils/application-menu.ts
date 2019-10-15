@@ -50,7 +50,6 @@ const generateTemplate = () => {
           const walletsService = WalletsService.getInstance()
           const currentWallet = walletsService.getCurrent()
           if (!currentWallet) {
-            // TODO: show the error message
             return
           }
           walletsService.requestPassword(currentWallet.id, 'backup-wallet')
@@ -63,35 +62,10 @@ const generateTemplate = () => {
           const walletsService = WalletsService.getInstance()
           const currentWallet = walletsService.getCurrent()
           if (!currentWallet) {
-            // TODO: show the error message
             return
           }
           walletsService.requestPassword(currentWallet.id, 'delete-wallet')
         },
-      },
-    ],
-  }
-
-  const editMenuItem: MenuItemConstructorOptions = {
-    id: 'edit',
-    label: i18n.t('application-menu.edit.label'),
-    submenu: [
-      {
-        label: i18n.t('application-menu.edit.cut'),
-        role: 'cut',
-      },
-      {
-        label: i18n.t('application-menu.edit.copy'),
-        role: 'copy',
-      },
-      {
-        label: i18n.t('application-menu.edit.paste'),
-        role: 'paste',
-      },
-      separator,
-      {
-        label: i18n.t('application-menu.edit.selectall'),
-        role: 'selectAll',
       },
     ],
   }
@@ -191,8 +165,8 @@ const generateTemplate = () => {
   }
 
   const applicationMenuTemplate = env.isDevMode
-    ? [walletMenuItem, editMenuItem, viewMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
-    : [walletMenuItem, editMenuItem, viewMenuItem, windowMenuItem, helpMenuItem]
+    ? [walletMenuItem, viewMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
+    : [walletMenuItem, viewMenuItem, windowMenuItem, helpMenuItem]
 
   if (isMac) {
     applicationMenuTemplate.unshift(appMenuItem)
