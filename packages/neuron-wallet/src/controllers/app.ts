@@ -1,7 +1,6 @@
 import {
   dialog,
   shell,
-  Menu,
   MessageBoxOptions,
   MessageBoxReturnValue,
   SaveDialogOptions,
@@ -16,7 +15,11 @@ import WindowManager from 'models/window-manager'
 import env from 'env'
 import CommandSubject from 'models/subjects/command'
 
-import { URL, contextMenuTemplate } from './options'
+enum URL {
+  CreateWallet = '/wizard/mnemonic/create',
+  ImportMnemonic = '/wizard/mnemonic/import',
+  ImportKeystore = '/keystore/import',
+}
 
 export default class AppController {
   public static getInitState = async () => {
@@ -63,24 +66,6 @@ export default class AppController {
 
   public static openExternal(url: string) {
     shell.openExternal(url)
-  }
-
-  public static async contextMenu(params: { type: string; id: string }) {
-    if (!params || params.id === undefined) {
-      return
-    }
-    const { id, type } = params
-    switch (type) {
-      case 'copyMainnetAddress':
-      case 'walletList': {
-        const menu = Menu.buildFromTemplate(await contextMenuTemplate[type](id))
-        menu.popup()
-        break
-      }
-      default: {
-        break
-      }
-    }
   }
 
   public static showAbout() {
