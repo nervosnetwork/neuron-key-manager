@@ -3,41 +3,6 @@
     "launch-screen": {
       "loading-wallets": "Loading wallets"
     },
-    "navbar": {
-      "overview": "Overview",
-      "wallet": "Wallet",
-      "send": "Send",
-      "receive": "Receive",
-      "history": "History",
-      "addresses": "Addresses",
-      "settings": "Settings"
-    },
-    "overview": {
-      "balance": "Balance",
-      "recent-activities": "Recent Activities",
-      "no-recent-activities": "No Recent Activities",
-      "activity": "Activity",
-      "datetime": "Date & Time",
-      "status": "Status",
-      "amount": "Amount",
-      "blockchain-status": "Blockchain Status",
-      "chain-identity": "Chain Identity",
-      "tip-block-number": "Block Number",
-      "epoch": "Epoch",
-      "difficulty": "Difficulty",
-      "miner-info": "Miner Info",
-      "lock-arg": "Lock Arg",
-      "address": "Address",
-      "code-hash": "Code Hash",
-      "copy-pubkey-hash": "Copy Lock Arg (Pubkey Hash)",
-      "confirmation": "{{confirmationCount}} Confirmation",
-      "confirmations": "{{confirmationCount}} Confirmations",
-      "sent": "Sent",
-      "sending": "Sending",
-      "received": "Received",
-      "receiving": "Receiving",
-      "more": "More activities"
-    },
     "wizard": {
       "welcome-to-nervos-neuron": "Welcome to Neuron Key Manager",
       "create-or-import-your-first-wallet": "Create or import your wallet",
@@ -77,30 +42,6 @@
         "submit": "Submit"
       }
     },
-    "detail": {
-      "more-transactions": "More"
-    },
-    "send": {
-      "address": "Send to",
-      "amount": "Amount",
-      "send": "Send",
-      "clear": "Clear",
-      "confirm-password": "Confirm Password",
-      "to": "To",
-      "input-password-to-confirm": "Input password to confirm",
-      "scan-to-get-address": "Scan QR code to read the address to send to",
-      "total-amount": "Total Amount",
-      "description": "Description",
-      "description-optional": "Description (optional)",
-      "balance": "Balance",
-      "add-one": "Add One More",
-      "remove-this": "Remove This",
-      "fee": "Transaction Fee",
-      "advanced-fee-settings": "Advanced fee settings",
-      "price": "Price",
-      "expected-speed": "Expected speed",
-      "total-cycles": "Total RISC-V Cycles"
-    },
     "receive": {
       "click-to-copy": "Click to copy the address",
       "copy-address": "Copy Addres",
@@ -109,112 +50,9 @@
       "mainnet-address": "CKB Mainnet Address",
       "address-qrcode": "Address QR Code"
     },
-    "history": {
-      "meta": "Meta",
-      "type": "Type",
-      "date": "Date",
-      "timestamp": "Time",
-      "amount": "Amount",
-      "transaction-hash": "Transaction Hash",
-      "send": "Send",
-      "receive": "Receive",
-      "other": "Other",
-      "more-actions": "More Actions",
-      "detail": "Detail",
-      "explorer": "Explorer",
-      "first": "First",
-      "previous": "Previous",
-      "next": "Next",
-      "last": "Last",
-      "description": "Description",
-      "status": "Status",
-      "pending": "Pending",
-      "success": "Success",
-      "failed": "Failed",
-      "confirming": "Confirming",
-      "blockNumber": "Block Number",
-      "basic-information": "Basic Information",
-      "search": {
-        "placeholder": "Search tx hash, address or date (yyyy-mm-dd)"
-      },
-      "confirmations": "Confirmations",
-      "confirming-with-count": "{{confirmations}} confirmations"
-    },
-    "transaction": {
-      "date": "Date",
-      "transaction-hash": "Transaction Hash",
-      "block-number": "Block Number",
-      "goBack": "Go back",
-      "index": "Index",
-      "address": "Address",
-      "income": "Income",
-      "amount": "Amount",
-      "inputs": "Inputs",
-      "outputs": "Outputs",
-      "view-in-explorer": "Explorer",
-      "view-in-explorer-button-title": "View on explorer"
-    },
-    "addresses": {
-      "addresses": "Addresses",
-      "type": "Type",
-      "address": "Address",
-      "identifier": "Identifier",
-      "description": "Description",
-      "balance": "Balance",
-      "transactions": "Transactions",
-      "receiving-address": "Receiving Address",
-      "change-address": "Change Address",
-      "display-testnet-addresses": "Display Testnet Addresses",
-      "display-mainnet-addresses": "Display Mainnet Addresses",
-      "mainnet-address-caution": "CAUTION: these are the MAINNET addresses"
-    },
-    "settings": {
-      "go-to-overview": "Go to Overview",
-      "setting-tabs": {
-        "general": "General",
-        "wallets": "Wallets",
-        "network": "Network"
-      },
-      "general": {
-        "display-address-book-in-the-navbar": "Show the address book",
-        "skip-data-and-type": "Skip the cells which contain data or type script",
-        "show": "Show",
-        "hide": "Hide"
-      },
-      "wallet-manager": {
-        "edit-wallet": {
-          "wallet-name": "Wallet Name",
-          "password": "Password",
-          "new-password": "New Password",
-          "confirm-password": "Confirm Password",
-          "edit-wallet": "Edit Wallet"
-        },
-        "delete-wallet-title": "Please Enter {{name}} Password",
-        "password": "Password",
-        "wallet-detail": {
-          "balance": "Balance"
-        }
-      },
-      "network": {
-        "online": "Online",
-        "offline": "Offline",
-        "add-network": "Add Network",
-        "edit-network": {
-          "title": "Add or Edit Network",
-          "rpc-url": "RPC URL",
-          "name": "Name"
-        },
-        "mainnet": "Mainnet",
-        "testnet": "Testnet",
-        "devnet": "Devnet"
-      }
-    },
     "password-request": {
       "wallet-not-found": "The wallet is not found",
       "password": "Password",
-      "send": {
-        "title": "Submit the transaction"
-      },
       "delete": {
         "title": "Delete the {{name}} wallet"
       },
@@ -225,9 +63,6 @@
     "qrcode": {
       "copy": "Copy image",
       "save": "Save QR Image"
-    },
-    "footer": {
-      "fail-to-fetch-tip-block-number": "Cannot fetch tip block number"
     },
     "common": {
       "or": "or",
@@ -252,19 +87,12 @@
       "unknown-error": "Unknown error",
       "update-wallet-successfully": "The wallet was updated",
       "delete-wallet-successfully": "The wallet was deleted",
-      "create-network-successfully": "The network was created",
-      "update-network-successfully": "The network was updated",
       "addr-copied": "Address has been copied to the clipboard",
       "qrcode-copied": "QR Code has been copied to the clipboard",
-      "lock-arg-copied": "Lock Arg has been copied to the clipboard",
       "fields": {
         "wallet": "Wallet",
         "name": "Name",
-        "remote": "RPC URL",
-        "network": "Network",
         "address": "Address",
-        "amount": "Amount",
-        "transaction": "Transaction",
         "default-address": "Default Address",
         "mnemonic": "Mnemonic",
         "keystore-path": "Keystore File",
@@ -273,8 +101,6 @@
       },
       "codes": {
         "-3": "",
-        "100": "Amount is not enough",
-        "101": "The amount {{amount}} CKB is too small, please enter an amount no less than 61 CKB",
         "102": "$t(messages.fields.{{fieldName}}) is invalid",
         "201": "$t(messages.fields.{{fieldName}}) is required",
         "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is used",
@@ -288,22 +114,8 @@
         "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is irremovable",
         "302": "Fail to launch the app",
         "303": "$t(messages.fields.{{fieldName}}) is not found",
-        "304": "Camera is unavailable or disabled",
         "305": "$t(messages.fields.address) cannot be empty"
       }
-    },
-    "sync": {
-      "syncing": "Syncing",
-      "synced": "Synced",
-      "block-number": "block number"
-    },
-    "pagination": {
-      "previous-page": "Previous page",
-      "next-page": "Next page",
-      "first-page": "First page",
-      "last-page": "Last page",
-      "page": "Page",
-      "selected": "Current page"
     }
   }
 }

@@ -53,13 +53,7 @@ export default {
         'toggle-dev-tools': 'Toggle Developer Tools',
       },
     },
-    services: {
-      transactions: 'Transactions',
-      wallets: 'Wallets',
-    },
     messages: {
-      'failed-to-load-networks': 'Failed to load networks',
-      'Networks-will-be-reset': 'Networks will be reset',
       'wallet-password-less-than-min-length': 'Password must be at least {{minPasswordLength}} characters',
       'wallet-password-more-than-max-length': 'Password up to {{maxPasswordLength}} characters',
       'wallet-password-letter-complexity':
@@ -68,7 +62,6 @@ export default {
       'incorrect-password': 'Password is incorrect',
       'current-key-has-no-data': 'Current Key has no data',
       'invalid-address': 'Address {{address}} is invalid',
-      'codehash-not-loaded': 'codehash is not loaded',
       'wallet-not-found': 'Wallet {{id}} not found',
       'no-current-wallet': 'No current wallet',
       'wallet-incorrect-password': 'Incorrect password',
@@ -77,10 +70,6 @@ export default {
       'failed-to-delete-wallet': 'Failed to delete wallet',
       'network-not-found': 'Network of ID {{id}} is not found',
       'invalid-name': '{{field}} name is invalid',
-      'default-network-unremovable': 'Default network is unremovable',
-      'lack-of-default-network': 'Lack of default network',
-      'current-network-not-set': 'Current network is not set',
-      'transaction-not-found': 'Transaction {{hash}} is not found',
       'service-not-respond': '{{service}} service not respond',
       'parameters-of-sending-transactions-are-required': 'Parameters of sending transactions are required',
       'is-required': '{{field}} is required',
@@ -90,9 +79,6 @@ export default {
       'save-keystore': 'Save Keystore',
       'invalid-mnemonic': 'Wallet seed is invalid',
       'unsupported-cipher': 'Unsupported cipher',
-      'capacity-not-enough': 'Capacity is not enough',
-      'capacity-not-enough-for-change': 'Capacity not enough for change',
-      'capacity-too-small': 'Capacity less than min',
       'should-be-type-of': '{{field}} should be type of {{type}}',
       'invalid-keystore': 'Keystore is invalid',
       'invalid-json': 'Invalid JSON file',
@@ -102,25 +88,11 @@ export default {
       backup: 'Backup',
       edit: 'Edit',
       delete: 'Delete',
-      'copy-address': 'Copy Address',
-      'request-payment': 'Request Payment',
-      'spend-from': 'Spend from',
-      'view-on-explorer': 'View on Explorer',
-      detail: 'Detail',
-      'copy-transaction-hash': 'Copy Transaction Hash',
     },
     messageBox: {
       button: {
         confirm: 'OK',
         discard: 'Cancel',
-      },
-      'send-capacity': {
-        title: 'Send Transaction',
-      },
-      'remove-network': {
-        title: 'Remove Network',
-        message: 'Network {{name}} (address: {{address}}) will be removed.',
-        alert: 'This is the current network, by removing it, the connection will be switched to the default network',
       },
       'remove-wallet': {
         title: 'Delete the wallet',
@@ -130,9 +102,6 @@ export default {
         title: 'Backup the Keystore',
         password: 'Password',
       },
-      transaction: {
-        title: 'Transaction: {{hash}}',
-      },
     },
     prompt: {
       password: {
@@ -140,12 +109,6 @@ export default {
         submit: 'Submit',
         cancel: 'Cancel',
       },
-    },
-    updater: {
-      'update-not-available': 'There are currently no updates available.',
-      'updates-found-do-you-want-to-update': 'An update ({{version}}) is available, do you want to update now?',
-      'update-now': 'Update now',
-      'updates-downloaded-about-to-quit-and-install': 'Update downloaded. Neuron will quit and install the update...',
     },
     common: {
       yes: 'Yes',

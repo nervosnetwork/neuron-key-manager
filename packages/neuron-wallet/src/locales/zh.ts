@@ -53,13 +53,7 @@ export default {
         'toggle-dev-tools': '开发者工具',
       },
     },
-    services: {
-      transactions: '交易',
-      wallets: '钱包',
-    },
     messages: {
-      'failed-to-load-networks': '加载节点失败',
-      'Networks-will-be-reset': '节点列表将被重置',
       'wallet-password-less-than-min-length': '密码应至少包含{{minPasswordLength}}位字符',
       'wallet-password-more-than-max-length': '密码不能超过{{maxPasswordLength}}位字符',
       'wallet-password-letter-complexity': '密码包含大写字母、小写字母、数字、特殊符号的至少三类',
@@ -67,19 +61,13 @@ export default {
       'incorrect-password': '密码不正确',
       'current-key-has-no-data': '当前 Key 文件缺少数据',
       'invalid-address': '地址 {{address}} 不合法',
-      'codehash-not-loaded': 'codehash 还未加载完成',
       'wallet-not-found': '未找到钱包 {{id}}',
       'no-current-wallet': '没有默认钱包',
       'wallet-incorrect-password': '密码错误',
       'failed-to-create-mnemonic': '创建助记词失败',
       'failed-to-activate-wallet': '设置默认钱包失败',
       'failed-to-delete-wallet': '删除钱包失败',
-      'network-not-found': '未找到 ID 为 {{id}} 的网络设置',
       'invalid-name': '{{field}} 名称不合法',
-      'default-network-unremovable': '默认网络不可删除',
-      'lack-of-default-network': '缺少默认网络',
-      'current-network-not-set': '未设置当前网络',
-      'transaction-not-found': '未找到交易 {{hash}}',
       'service-not-respond': '{{service}} 服务未响应',
       'parameters-of-sending-transactions-are-required': '缺少交易参数',
       'is-required': '缺少 {{field}}',
@@ -89,9 +77,6 @@ export default {
       'save-keystore': '保存 Keystore 文件',
       'invalid-mnemonic': '助记词不合法',
       'unsupported-cipher': '不支持的 Cipher',
-      'capacity-not-enough': '余额不足',
-      'capacity-not-enough-for-change': '余额不足以支付找零',
-      'capacity-too-small': '金额小于最低金额',
       'should-be-type-of': '{{field}} 应该为 {{type}} 类型',
       'invalid-keystore': 'Keystore 格式不正确',
       'invalid-json': 'JSON 文件格式不正确',
@@ -101,25 +86,11 @@ export default {
       backup: '备份',
       edit: '编辑',
       delete: '删除',
-      'copy-address': '复制地址',
-      'request-payment': '请求支付',
-      'spend-from': '支付来源',
-      'view-on-explorer': '在浏览器中查看',
-      detail: '详情',
-      'copy-transaction-hash': '复制交易哈希',
     },
     messageBox: {
       button: {
         confirm: '确定',
         discard: '放弃',
-      },
-      'send-capacity': {
-        title: '发送交易',
-      },
-      'remove-network': {
-        title: '删除网络',
-        message: '将删除网络 {{name}}(地址: {{address}})的设置.',
-        alert: '这是当前连接网络, 删除后会连接到默认网络',
       },
       'remove-wallet': {
         title: '删除钱包',
@@ -129,9 +100,6 @@ export default {
         title: '备份 Keystore 文件',
         password: '密码',
       },
-      transaction: {
-        title: '交易: {{hash}}',
-      },
     },
     prompt: {
       password: {
@@ -139,12 +107,6 @@ export default {
         submit: '提交',
         cancel: '取消',
       },
-    },
-    updater: {
-      'update-not-available': '没有可供升级的新版本。',
-      'updates-found-do-you-want-to-update': '有可供升级的新版本({{version}})。现在进行升级吗？',
-      'update-now': '马上升级',
-      'updates-downloaded-about-to-quit-and-install': '下载完成。Neuron 将退出并安装新版本...',
     },
     common: {
       yes: '是',
