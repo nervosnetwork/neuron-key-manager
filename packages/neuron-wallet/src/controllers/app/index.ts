@@ -10,7 +10,6 @@ import {
 import app from 'app'
 
 import WalletsService from 'services/wallets'
-import WalletsController from 'controllers/wallets'
 
 import { ResponseCode } from 'utils/const'
 import WindowManager from 'models/window-manager'
@@ -30,15 +29,9 @@ export default class AppController {
       walletsService.getAll(),
     ])
 
-    const addresses: Controller.Address[] = await (currentWallet
-      ? WalletsController.getAllAddresses(currentWallet.id).then(res => res.result)
-      : [])
-
-
     const initState = {
       currentWallet,
       wallets: [...wallets.map(({ name, id }, idx: number) => ({ id, name, idx: idx }))],
-      addresses,
     }
 
     return { status: ResponseCode.Success, result: initState }
@@ -79,8 +72,7 @@ export default class AppController {
     const { id, type } = params
     switch (type) {
       case 'copyMainnetAddress':
-      case 'walletList':
-      case 'addressList': {
+      case 'walletList': {
         const menu = Menu.buildFromTemplate(await contextMenuTemplate[type](id))
         menu.popup()
         break

@@ -100,8 +100,7 @@ declare namespace State {
   }
 
   interface Wallet extends WalletIdentity {
-    balance: string
-    addresses: Address[]
+    address: string
   }
 
   interface Settings {

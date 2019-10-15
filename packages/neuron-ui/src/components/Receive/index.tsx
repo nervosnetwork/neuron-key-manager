@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Stack, Text } from 'office-ui-fabric-react'
@@ -7,19 +7,12 @@ import { StateWithDispatch } from 'states/stateProvider/reducer'
 import QRCode from './qr-code'
 
 const Receive = ({
-  wallet: { addresses = [] },
-  match: { params },
+  wallet: { address = '' },
   dispatch,
-}: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps<{ address: string }>>) => {
+}: React.PropsWithoutRef<StateWithDispatch & RouteComponentProps>) => {
   const [t] = useTranslation()
 
-  const accountAddress = useMemo(
-    () =>
-      params.address ||
-      (addresses.find(addr => addr.type === 0 && addr.txCount === 0) || { address: '' }).address ||
-      '',
-    [params, addresses]
-  )
+  const accountAddress = address
 
   if (!accountAddress) {
     return <div>{t('receive.address-not-found')}</div>

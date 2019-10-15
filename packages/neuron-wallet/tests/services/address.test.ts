@@ -12,19 +12,6 @@ const extendedKey = new AccountExtendedPublicKey(
 )
 
 describe('Key tests', () => {
-  it('Generate addresses from extended public key', () => {
-    const addresses = AddressService.generateAddresses('1', extendedKey, 0, 0, 2, 2)
-
-    expect(2).toBe(addresses.testnetReceiving.length)
-    expect("m/44'/309'/0'/0/0").toBe(addresses.testnetReceiving[0].path)
-    expect('ckt1qyqq96psh4h7rxgjl7mmpvf5e0jnz79earcsyrlxrx').toBe(addresses.testnetReceiving[0].address)
-
-    // will include testnet address and mainnet address, [0] and [1] will be same
-    expect(2).toBe(addresses.testnetChange.length)
-    expect("m/44'/309'/0'/1/1").toBe(addresses.testnetChange[1].path)
-    expect('ckt1qyq0phsyqvgkfkzrshphsramyxyz8yew3yzsl76naf').toBe(addresses.testnetChange[1].address)
-  })
-
   it('toAddress', () => {
     const metaInfo = {
       walletId,
@@ -90,11 +77,7 @@ describe('Key tests with db', () => {
   })
 
   const generate = async (id: string = walletId) => {
-    await AddressService.generateAndSave(id, extendedKey, undefined, 0, 0, 2, 1)
-  }
-
-  const checkAndGenerate = async (id: string = walletId) => {
-    await AddressService.checkAndGenerateSave(id, extendedKey, undefined, 2, 1)
+    await AddressService.generateAndSave(id, extendedKey)
   }
 
   it('generateAndSave', async () => {
@@ -125,8 +108,6 @@ describe('Key tests with db', () => {
       })
     await getConnection().manager.save(usedAll)
 
-    await checkAndGenerate()
-
     const final = await getConnection()
       .getRepository(AddressEntity)
       .createQueryBuilder('address')
@@ -144,12 +125,6 @@ describe('Key tests with db', () => {
       .getMany()
 
     expect(all.length).toEqual((2 + 1) * 2 * 2)
-  })
-
-  it('isAddressUsed', async () => {
-    await AddressDao.create([address, usedAddress])
-    const used = await AddressService.isAddressUsed(address.address, walletId)
-    expect(used).toBe(true)
   })
   it('allAddresses', async () => {
     await generate()

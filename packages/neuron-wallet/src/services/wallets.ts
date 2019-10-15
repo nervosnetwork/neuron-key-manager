@@ -1,27 +1,24 @@
+import { AddressPrefix } from '@nervosnetwork/ckb-sdk-utils'
 import { v4 as uuid } from 'uuid'
-import { debounceTime } from 'rxjs/operators'
 import { AccountExtendedPublicKey } from 'models/keys/key'
+import { AddressType } from 'models/keys/address'
 import Keystore from 'models/keys/keystore'
 import Store from 'models/store'
 import { WalletNotFound, IsRequired, UsedName } from 'exceptions'
-import { Address as AddressInterface } from 'database/address/dao'
-import AddressDbChangedSubject from 'models/subjects/address-db-changed-subject'
 import { WalletListSubject, CurrentWalletSubject } from 'models/subjects/wallets'
-import dataUpdateSubject from 'models/subjects/data-update'
 import CommandSubject from 'models/subjects/command'
 import WindowManager from 'models/window-manager'
 
 import FileService from './file'
-import AddressService from './addresses'
 
 const fileService = FileService.getInstance()
 
 const MODULE_NAME = 'wallets'
-const DEBOUNCE_TIME = 200
 
 export interface Wallet {
   id: string
   name: string
+  address: string
 
   loadKeystore: () => Keystore
   accountExtendedPublicKey: () => AccountExtendedPublicKey
@@ -30,6 +27,7 @@ export interface Wallet {
 export interface WalletProperties {
   id: string
   name: string
+  address: string
   extendedKey: string // Serialized account extended public key
   keystore?: Keystore
 }
@@ -37,10 +35,11 @@ export interface WalletProperties {
 export class FileKeystoreWallet implements Wallet {
   public id: string
   public name: string
+  public address: string
   private extendedKey: string = ''
 
   constructor(props: WalletProperties) {
-    const { id, name, extendedKey } = props
+    const { id, name, address, extendedKey } = props
 
     if (id === undefined) {
       throw new IsRequired('ID')
@@ -51,6 +50,7 @@ export class FileKeystoreWallet implements Wallet {
 
     this.id = id
     this.name = name
+    this.address = address
     this.extendedKey = extendedKey
   }
 
@@ -72,6 +72,7 @@ export class FileKeystoreWallet implements Wallet {
     return {
       id: this.id,
       name: this.name,
+      address: this.address,
       extendedKey: this.extendedKey,
     }
   }
@@ -128,15 +129,6 @@ export default class WalletService {
         walletList,
       })
     })
-
-    AddressDbChangedSubject.getSubject()
-      .pipe(debounceTime(DEBOUNCE_TIME))
-      .subscribe(() => {
-        dataUpdateSubject.next({
-          dataType: 'address',
-          actionType: 'update',
-        })
-      })
   }
 
   public getAll = (): WalletProperties[] => {
@@ -156,14 +148,13 @@ export default class WalletService {
     return FileKeystoreWallet.fromJSON(wallet)
   }
 
-  public generateAddressesById = async (id: string, isImporting: boolean) => {
-    const wallet: Wallet = this.get(id)
-    const accountExtendedPublicKey: AccountExtendedPublicKey = wallet.accountExtendedPublicKey()
-    await AddressService.generateAndSave(
-      id,
-      accountExtendedPublicKey,
-      isImporting
+  public generateAddress = (accountExtendedPublicKey: AccountExtendedPublicKey) => {
+    const address = accountExtendedPublicKey.address(
+      AddressType.Receiving,
+      0,
+      AddressPrefix.Mainnet
     )
+    return address.address
   }
 
   public create = (props: WalletProperties) => {
@@ -273,20 +264,6 @@ export default class WalletService {
       wallet.deleteKeystore()
     })
     this.listStore.clear()
-  }
-
-  // path is a BIP44 full path such as "m/44'/309'/0'/0/0"
-  public getAddressInfos = async (walletID: string): Promise<AddressInterface[]> => {
-    const wallet = await this.get(walletID)
-    if (!wallet) {
-      throw new WalletNotFound(walletID)
-    }
-    const addrs = await AddressService.allAddressesByWalletId(walletID)
-    return addrs
-  }
-
-  public getChangeAddress = async (): Promise<string> => {
-    return ""
   }
 
   public requestPassword = (walletID: string, actionType: 'delete-wallet' | 'backup-wallet') => {

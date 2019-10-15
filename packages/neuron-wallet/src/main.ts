@@ -4,7 +4,6 @@ import { debounceTime } from 'rxjs/operators'
 import { updateApplicationMenu } from 'utils/application-menu'
 import WindowManager from 'models/window-manager'
 import createMainWindow from 'startup/create-main-window'
-import initConnection from 'database/address/ormconfig'
 import { WalletListSubject, CurrentWalletSubject } from 'models/subjects/wallets'
 import dataUpdateSubject from 'models/subjects/data-update'
 import app from 'app'
@@ -39,7 +38,6 @@ app.on('ready', async () => {
     }
   })
 
-  await initConnection()
   openWindow()
 })
 
