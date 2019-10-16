@@ -13,6 +13,7 @@ afterSign: scripts/notarize.js
 files:
   - from: "../.."
     to: "."
+    filter: ["!**/*"]
   - package.json
   - dist
   - "!**/*.map"
