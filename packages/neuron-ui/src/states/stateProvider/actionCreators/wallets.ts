@@ -41,7 +41,7 @@ export const createWalletWithMnemonic = (params: Controller.ImportMnemonicParams
   _dispatch: StateDispatch,
   history: any
 ) => {
-  createWallet(params).then(res => {
+  return createWallet(params).then(res => {
     if (res.status === 1) {
       history.push(Routes.Receive)
     } else if (res.status > 0) {
@@ -55,11 +55,11 @@ export const createWalletWithMnemonic = (params: Controller.ImportMnemonicParams
   })
 }
 
-export const importWalletWithMnemonic = (params: Controller.ImportMnemonicParams) => (
+export const importWalletWithMnemonic = (params: Controller.ImportMnemonicParams) => async (
   _dispatch: StateDispatch,
   history: any
 ) => {
-  importMnemonic(params).then(res => {
+  return importMnemonic(params).then(res => {
     if (res.status === 1) {
       history.push(Routes.Receive)
     } else if (res.status > 0) {
@@ -73,11 +73,11 @@ export const importWalletWithMnemonic = (params: Controller.ImportMnemonicParams
   })
 }
 
-export const importWalletWithKeystore = (params: Controller.ImportKeystoreParams) => (
+export const importWalletWithKeystore = (params: Controller.ImportKeystoreParams) => async (
   _dispatch: StateDispatch,
   history: any
 ) => {
-  importKeystore(params).then(res => {
+  return importKeystore(params).then(res => {
     if (res.status === 1) {
       history.push(Routes.Receive)
     } else if (res.status > 0) {
