@@ -33,21 +33,6 @@ export const backupWallet = controllerMethodWrapper(CONTROLLER_NAME)(
 export const setCurrentWallet = controllerMethodWrapper(CONTROLLER_NAME)(
   controller => (id: Controller.SetCurrentWalletParams) => controller.activate(id)
 )
-export const sendCapacity = controllerMethodWrapper(CONTROLLER_NAME)(
-  controller => (params: Controller.SendTransaction) => controller.sendCapacity(params)
-)
-
-export const getAddressesByWalletID = controllerMethodWrapper(CONTROLLER_NAME)(
-  controller => (walletID: Controller.GetAddressesByWalletIDParams) => controller.getAllAddresses(walletID)
-)
-
-export const updateAddressDescription = controllerMethodWrapper(CONTROLLER_NAME)(
-  controller => (params: Controller.UpdateAddressDescriptionParams) => controller.updateAddressDescription(params)
-)
-
-export const calculateCycles = controllerMethodWrapper(CONTROLLER_NAME)(
-  controller => (params: Controller.ComputeCycles) => controller.computeCycles(params)
-)
 
 export default {
   updateWallet,
@@ -58,8 +43,4 @@ export default {
   deleteWallet,
   backupWallet,
   getCurrentWallet,
-  sendCapacity,
-  calculateCycles,
-  getAddressesByWalletID,
-  updateAddressDescription,
 }

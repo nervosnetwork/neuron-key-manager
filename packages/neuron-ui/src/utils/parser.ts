@@ -1,17 +1,3 @@
-import { PAGE_SIZE } from './const'
-
-export const history = (search: string) => {
-  const query = new URLSearchParams(search)
-  const keywords = query.get('keywords') || ''
-  // use Object.fromEntries in ES10
-  const params = {
-    pageNo: +(query.get('pageNo') || 1),
-    pageSize: +(query.get('pageSize') || PAGE_SIZE),
-    keywords,
-  }
-  return params
-}
-
 export const prompt = (search: string) => {
   const query = new URLSearchParams(search)
   const params: { [index: string]: string | null } = {}
@@ -21,6 +7,6 @@ export const prompt = (search: string) => {
   })
   return params
 }
-export const queryParsers = { history, prompt }
+export const queryParsers = { prompt }
 
 export default { queryParsers }

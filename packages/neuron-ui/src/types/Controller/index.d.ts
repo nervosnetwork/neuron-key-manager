@@ -33,42 +33,4 @@ declare namespace Controller {
   }
 
   type SetCurrentWalletParams = string
-  interface SendTransaction {
-    id: string
-    walletID: string
-    items: {
-      address: string
-      capacity: string
-    }[]
-    password: string
-    fee: string
-    description: string
-  }
-
-  interface ComputeCycles {
-    walletID: string
-    capacities: string
-  }
-
-  type GetAddressesByWalletIDParams = string
-  interface UpdateAddressDescriptionParams {
-    walletID: string
-    address: string
-    description: string
-  }
-
-  interface CreateNetworkParams {
-    name: string
-    remote: string
-  }
-
-  interface UpdateNetworkParams {
-    networkID: string
-    options: Partial<{ name: string; remote: string }>
-  }
-  interface UpdateTransactionDescriptionParams {
-    hash: string
-    description: string
-  }
-  type SetSkipAndTypeParam = boolean
 }

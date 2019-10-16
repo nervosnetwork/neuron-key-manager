@@ -3,41 +3,6 @@
     "launch-screen": {
       "loading-wallets": "钱包加载中"
     },
-    "navbar": {
-      "overview": "总览",
-      "wallet": "钱包",
-      "send": "转账",
-      "receive": "收款",
-      "history": "交易历史",
-      "addresses": "地址管理",
-      "settings": "设置"
-    },
-    "overview": {
-      "balance": "余额",
-      "recent-activities": "最近收支",
-      "no-recent-activities": "没有收支记录",
-      "activity": "收支活动",
-      "datetime": "时间",
-      "status": "状态",
-      "amount": "金额",
-      "blockchain-status": "链状态",
-      "chain-identity": "链 ID",
-      "tip-block-number": "区块高度",
-      "epoch": "Epoch",
-      "difficulty": "难度",
-      "miner-info": "挖矿信息",
-      "lock-arg": "Lock Arg",
-      "address": "地址",
-      "code-hash": "Code Hash",
-      "copy-pubkey-hash": "复制 Lock Arg (Pubkey Hash)",
-      "confirmation": "{{confirmationCount}} 个确认",
-      "confirmations": "{{confirmationCount}} 个确认",
-      "sent": "已发送",
-      "sending": "正在发送",
-      "received": "已收款",
-      "receiving": "正在收款",
-      "more": "查看更多记录"
-    },
     "wizard": {
       "welcome-to-nervos-neuron": "欢迎使用 Neuron Key Manager",
       "create-or-import-your-first-wallet": "创建或导入一个钱包",
@@ -77,136 +42,12 @@
         "submit": "提交"
       }
     },
-    "detail": {
-      "more-transactions": "更多交易记录"
-    },
-    "send": {
-      "address": "地址",
-      "amount": "金额",
-      "send": "发送",
-      "clear": "清除",
-      "confirm-password": "确认密码",
-      "to": "收款地址",
-      "input-password-to-confirm": "输入密码以确认本次交易",
-      "scan-to-get-address": "扫描二维码以获取地址",
-      "total-amount": "总金额",
-      "description": "备注",
-      "description-optional": "备注 (选填)",
-      "balance": "余额",
-      "add-one": "添加",
-      "remove-this": "删除",
-      "fee": "交易费",
-      "advanced-fee-settings": "交易费高级设置",
-      "price": "单价",
-      "expected-speed": "预期成交速度",
-      "total-cycles": "RISC-V Cycles 总数"
-    },
     "receive": {
       "click-to-copy": "点击复制地址",
       "copy-address": "复制地址",
       "address-not-found": "未找到地址",
       "prompt": "CKB 主网上线后，请使用官方 Neuron 钱包查看余额或进行转账操作。",
       "mainnet-address": "CKB 主网地址"
-    },
-    "history": {
-      "meta": "元信息",
-      "type": "交易类型",
-      "date": "时间",
-      "timestamp": "时间",
-      "amount": "金额",
-      "transaction-hash": "交易哈希",
-      "send": "转账",
-      "receive": "收款",
-      "other": "其他",
-      "more-actions": "更多操作",
-      "detail": "详情",
-      "explorer": "浏览器",
-      "first": "第一页",
-      "previous": "前一页",
-      "next": "后一页",
-      "last": "最后一页",
-      "description": "标签",
-      "status": "状态",
-      "pending": "已提交",
-      "success": "成功",
-      "failed": "失败",
-      "confirming": "确认中",
-      "blockNumber": "区块高度",
-      "basic-information": "基本信息",
-      "search": {
-        "placeholder": "使用交易哈希、地址或日期(yyyy-mm-dd)进行搜索"
-      },
-      "confirmations": "确认次数",
-      "confirming-with-count": " 已确认 {{confirmations}} 次"
-    },
-    "transaction": {
-      "date": "时间",
-      "transaction-hash": "交易哈希",
-      "block-number": "区块高度",
-      "goBack": "返回",
-      "index": "序号",
-      "address": "地址",
-      "income": "收入",
-      "amount": "数量",
-      "inputs": "输入",
-      "outputs": "输出",
-      "view-in-explorer": "浏览器",
-      "view-in-explorer-button-title": "浏览器中查看详情"
-    },
-    "addresses": {
-      "addresses": "地址",
-      "type": "类型",
-      "address": "地址",
-      "identifier": "标志",
-      "description": "标签",
-      "balance": "余额",
-      "transactions": "交易总数",
-      "receiving-address": "收款地址",
-      "change-address": "找零地址",
-      "display-testnet-addresses": "显示测试网地址",
-      "display-mainnet-addresses": "显示主网地址",
-      "mainnet-address-caution": "请注意, 当前显示的是主网地址"
-    },
-    "settings": {
-      "go-to-overview": "返回总览画面",
-      "setting-tabs": {
-        "general": "通用",
-        "wallets": "钱包",
-        "network": "网络"
-      },
-      "general": {
-        "display-address-book-in-the-navbar": "显示地址簿",
-        "skip-data-and-type": "忽略包含 Data 或 Type Script 的 Cell",
-        "show": "显示",
-        "hide": "隐藏"
-      },
-      "wallet-manager": {
-        "edit-wallet": {
-          "wallet-name": "钱包名称",
-          "password": "密码",
-          "new-password": "新密码",
-          "confirm-password": "确认密码",
-          "edit-wallet": "编辑钱包"
-        },
-        "delete-wallet-title": "请输入{{name}}的密码",
-        "password": "密码",
-        "wallet-detail": {
-          "balance": "余额"
-        }
-      },
-      "network": {
-        "online": "在线",
-        "offline": "离线",
-        "add-network": "添加网络",
-        "edit-network": {
-          "title": "添加或编辑网络",
-          "rpc-url": "RPC地址",
-          "name": "名称"
-        },
-        "mainnet": "主网",
-        "testnet": "测试网",
-        "devnet": "开发网"
-      }
     },
     "password-request": {
       "wallet-not-found": "找不到该钱包",
@@ -224,9 +65,6 @@
     "qrcode": {
       "copy": "复制图片",
       "save": "保存二维码图片"
-    },
-    "footer": {
-      "fail-to-fetch-tip-block-number": "无法获取最新高度"
     },
     "common": {
       "or": "或",
@@ -251,19 +89,12 @@
       "unknown-error": "未知错误",
       "update-wallet-successfully": "已更新钱包信息",
       "delete-wallet-successfully": "已删除钱包",
-      "create-network-successfully": "已添加新节点",
-      "update-network-successfully": "已更新节点信息",
       "addr-copied": "已复制地址到剪贴板",
       "qrcode-copied": "已复制二维码到剪贴板",
-      "lock-arg-copied": "已复制 Lock Arg 到剪贴板",
       "fields": {
         "wallet": "钱包",
         "name": "名称",
-        "remote": "RPC URL",
-        "network": "网络",
         "address": "地址",
-        "amount": "金额",
-        "transaction": "交易",
         "default-address": "默认地址",
         "mnemonic": "助记词",
         "keystore-path": "Keystore 文件",
@@ -272,8 +103,6 @@
       },
       "codes": {
         "-3": "",
-        "100": "余额不足",
-        "101": "金额 {{amount}} CKB 太小, 请输入一个不小于 61 CKB 的值",
         "102": "$t(messages.fields.{{fieldName}})无效",
         "201": "缺少$t(messages.fields.{{fieldName}})",
         "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 已被使用",
@@ -287,22 +116,8 @@
         "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 不可删除",
         "302": "无法启动应用",
         "303": "未找到$t(messages.fields.{{fieldName}})",
-        "304": "摄像头不可用或被禁用",
         "305": "$t(messages.fields.address)不能为空"
       }
-    },
-    "sync": {
-      "syncing": "同步中",
-      "synced": "同步完成",
-      "block-number": "区块高度"
-    },
-    "pagination": {
-      "previous-page": "上一页",
-      "next-page": "下一页",
-      "first-page": "首页",
-      "last-page": "尾页",
-      "page": "页码",
-      "selected": "当前页"
     }
   }
 }
