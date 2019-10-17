@@ -94,17 +94,6 @@ const generateTemplate = () => {
     ],
   }
 
-  const viewMenuItem: MenuItemConstructorOptions = {
-    id: 'view',
-    label: i18n.t('application-menu.view.label'),
-    submenu: [
-      {
-        label: i18n.t('application-menu.view.fullscreen'),
-        role: 'togglefullscreen',
-      },
-    ],
-  }
-
   const windowMenuItem: MenuItemConstructorOptions = {
     id: 'window',
     label: i18n.t('application-menu.window.label'),
@@ -189,8 +178,8 @@ const generateTemplate = () => {
   }
 
   const applicationMenuTemplate = env.isDevMode
-    ? [walletMenuItem, editMenuItem, viewMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
-    : [walletMenuItem, editMenuItem, viewMenuItem, windowMenuItem, helpMenuItem]
+    ? [walletMenuItem, editMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
+    : [walletMenuItem, editMenuItem, windowMenuItem, helpMenuItem]
 
   if (isMac) {
     applicationMenuTemplate.unshift(appMenuItem)

@@ -44,7 +44,7 @@
     },
     "receive": {
       "click-to-copy": "Click to copy the address",
-      "copy-address": "Copy Addres",
+      "copy-address": "Copy Address",
       "address-not-found": "Address not found",
       "prompt": "Please use the official Neuron wallet to check balance and process transactions after CKB mainnet launch.",
       "mainnet-address": "CKB Mainnet Address",
