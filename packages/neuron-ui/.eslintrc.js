@@ -31,6 +31,7 @@ module.exports = {
     }],
     "no-unused-vars": "off",
     "implicit-arrow-linebreak": "off",
+    "no-bitwise": "off",
     "@typescript-eslint/no-unused-vars": ["error", {
       "vars": "local",
       "args": "after-used",
