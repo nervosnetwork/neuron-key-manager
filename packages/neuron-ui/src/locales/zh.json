@@ -118,6 +118,22 @@
         "303": "未找到$t(messages.fields.{{fieldName}})",
         "305": "$t(messages.fields.address)不能为空"
       }
+    },
+    "terms": {
+      "title": "用户条款",
+      "intro": "在使用本软件之前, 您必须确认一下条款",
+      "for-us-residents": {
+        "label": "我是美国居民",
+        "terms": "Terms for US Residents",
+        "exit": "不同意",
+        "agree": "我是美国居民, 且同意上述条款"
+      },
+      "for-non-us-residents": {
+        "label": "我不是美国居民",
+        "terms": "Terms for Non US Residents",
+        "exit": "不同意",
+        "agree": "我不是美国居民, 且同意上述条款"
+      }
     }
   }
 }

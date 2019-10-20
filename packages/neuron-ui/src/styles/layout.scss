@@ -3,7 +3,8 @@ body {
   grid-template:
     'notification notification notification' auto
     'content content content' 1fr
-    'content content content' 1fr;
+    'content content content' 1fr/
+    1fr 1fr 1fr;
 
   height: 100vh;
 }

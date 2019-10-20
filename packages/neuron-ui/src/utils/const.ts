@@ -38,3 +38,5 @@ export enum ErrorCode {
   CameraUnavailable = 304,
   AddressIsEmpty = 305,
 }
+
+export const HAS_READ_TERMS = 'hasReadTerms'
