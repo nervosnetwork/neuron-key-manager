@@ -116,6 +116,22 @@
         "303": "$t(messages.fields.{{fieldName}}) is not found",
         "305": "$t(messages.fields.address) cannot be empty"
       }
+    },
+    "terms": {
+      "title": "User Agreement",
+      "intro": "You must accept the following agreement before using this software.",
+      "for-us-residents": {
+        "label": "FOR U.S RESIDENTS",
+        "terms": "Terms for US Residents",
+        "exit": "Exit",
+        "agree": "I'm U.S. Resident & I Accept the Agreement"
+      },
+      "for-non-us-residents": {
+        "label": "FOR NON-U.S. RESIDENTS",
+        "terms": "Terms for Non US Residents",
+        "exit": "Exit",
+        "agree": "I'm NON-US Resident & I Accept the Agreement"
+      }
     }
   }
 }
