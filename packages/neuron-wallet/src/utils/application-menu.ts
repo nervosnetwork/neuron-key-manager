@@ -13,6 +13,10 @@ const separator: MenuItemConstructorOptions = {
 }
 
 const generateTemplate = () => {
+  const walletsService = WalletsService.getInstance()
+  const currentWallet = walletsService.getCurrent()
+  const hasWallet = currentWallet !== undefined
+
   const appMenuItem: MenuItemConstructorOptions = {
     id: 'app',
     label: app.getName(),
@@ -46,26 +50,14 @@ const generateTemplate = () => {
       {
         id: 'backup',
         label: i18n.t('application-menu.wallet.backup'),
-        click: () => {
-          const walletsService = WalletsService.getInstance()
-          const currentWallet = walletsService.getCurrent()
-          if (!currentWallet) {
-            return
-          }
-          walletsService.requestPassword(currentWallet.id, 'backup-wallet')
-        },
+        enabled: hasWallet,
+        click: () => { walletsService.requestPassword(currentWallet!.id, 'backup-wallet') }
       },
       {
         id: 'delete',
         label: i18n.t('application-menu.wallet.delete'),
-        click: () => {
-          const walletsService = WalletsService.getInstance()
-          const currentWallet = walletsService.getCurrent()
-          if (!currentWallet) {
-            return
-          }
-          walletsService.requestPassword(currentWallet.id, 'delete-wallet')
-        },
+        enabled: hasWallet,
+        click: () => { walletsService.requestPassword(currentWallet!.id, 'delete-wallet') }
       },
     ],
   }
@@ -94,24 +86,9 @@ const generateTemplate = () => {
     ],
   }
 
-  const windowMenuItem: MenuItemConstructorOptions = {
-    id: 'window',
-    label: i18n.t('application-menu.window.label'),
-    submenu: [
-      {
-        label: i18n.t('application-menu.window.minimize'),
-        role: 'minimize',
-      },
-      {
-        label: i18n.t('application-menu.window.close'),
-        role: 'close',
-      },
-    ],
-  }
-
   const helpSubmenu: MenuItemConstructorOptions[] = [
     {
-      label: 'Nervos',
+      label: i18n.t('application-menu.help.nervos-website'),
       click: () => {
         if (AppController) {
           AppController.openExternal(ExternalURL.Website)
@@ -123,14 +100,6 @@ const generateTemplate = () => {
       click: () => {
         if (AppController) {
           AppController.openExternal(ExternalURL.Repository)
-        }
-      },
-    },
-    {
-      label: i18n.t('application-menu.help.report-issue'),
-      click: () => {
-        if (AppController) {
-          AppController.openExternal(ExternalURL.Issues)
         }
       },
     },
@@ -178,8 +147,8 @@ const generateTemplate = () => {
   }
 
   const applicationMenuTemplate = env.isDevMode
-    ? [walletMenuItem, editMenuItem, developMenuItem, windowMenuItem, helpMenuItem]
-    : [walletMenuItem, editMenuItem, windowMenuItem, helpMenuItem]
+    ? [walletMenuItem, editMenuItem, developMenuItem, helpMenuItem]
+    : [walletMenuItem, editMenuItem, helpMenuItem]
 
   if (isMac) {
     applicationMenuTemplate.unshift(appMenuItem)
