@@ -13,6 +13,8 @@ import {
 import { useTranslation } from 'react-i18next'
 import { HAS_READ_TERMS } from 'utils/const'
 
+import styles from './terms.module.scss'
+
 const Terms = ({ setHasReadTerms }: { setHasReadTerms: Function }) => {
   const [t] = useTranslation()
   useEffect(() => {
@@ -40,7 +42,7 @@ const Terms = ({ setHasReadTerms }: { setHasReadTerms: Function }) => {
   const { semanticColors } = getTheme()
 
   return (
-    <div>
+    <Stack verticalFill className={styles.termsContainer}>
       <Label styles={{ root: { color: semanticColors.primaryButtonBackground } }}>{t('terms.intro')}</Label>
       <Pivot linkSize={PivotLinkSize.large}>
         {['for-us-residents', 'for-non-us-residents'].map((type: string) => (
@@ -62,7 +64,7 @@ const Terms = ({ setHasReadTerms }: { setHasReadTerms: Function }) => {
           </PivotItem>
         ))}
       </Pivot>
-    </div>
+    </Stack>
   )
 }
 
