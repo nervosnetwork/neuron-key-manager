@@ -1,0 +1,31 @@
+.termsContainer {
+  &>div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    div[role=tabpanel] {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      &>div {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        &>div:first-child {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+
+          div {
+            display: flex;
+            flex-direction: column;
+            flex: 1
+          }
+        }
+      }
+    }
+  }
+}
