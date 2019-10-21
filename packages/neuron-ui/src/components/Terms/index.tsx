@@ -45,7 +45,7 @@ const Terms = ({ setHasReadTerms }: { setHasReadTerms: Function }) => {
             <TextField
               multiline
               resizable={false}
-              value={t(`terms.${type}.terms`)}
+              value={t(`agreement.${type}`)}
               styles={{
                 root: {
                   margin: '15px 0',
