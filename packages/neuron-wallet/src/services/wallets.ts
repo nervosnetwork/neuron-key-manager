@@ -6,8 +6,6 @@ import Keystore from 'models/keys/keystore'
 import Store from 'models/store'
 import { WalletNotFound, IsRequired, UsedName } from 'exceptions'
 import { WalletListSubject, CurrentWalletSubject } from 'models/subjects/wallets'
-import CommandSubject from 'models/subjects/command'
-import WindowManager from 'models/window-manager'
 
 import FileService from './file'
 
@@ -264,15 +262,5 @@ export default class WalletService {
       wallet.deleteKeystore()
     })
     this.listStore.clear()
-  }
-
-  public requestPassword = (walletID: string, actionType: 'delete-wallet' | 'backup-wallet') => {
-    if (WindowManager.mainWindow) {
-      CommandSubject.next({
-        winID: WindowManager.mainWindow.id,
-        type: actionType,
-        payload: walletID,
-      })
-    }
   }
 }

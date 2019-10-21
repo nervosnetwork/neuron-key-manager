@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import { useState } from 'states/stateProvider'
+import { useState as useWalletState } from 'states/stateProvider'
 import { StateDispatch } from 'states/stateProvider/reducer'
 
 import WalletWizard from 'components/WalletWizard'
@@ -10,8 +10,9 @@ import ImportKeystore from 'components/ImportKeystore'
 import Receive from 'components/Receive'
 import LaunchScreen from 'components/LaunchScreen'
 import PasswordRequest from 'components/PasswordRequest'
+import Terms from 'components/Terms'
 
-import { Routes } from 'utils/const'
+import { Routes, HAS_READ_TERMS } from 'utils/const'
 
 import { useSubscription, useOnCurrentWalletChange } from './hooks'
 
@@ -53,7 +54,8 @@ const MainContent = ({
   history,
   dispatch,
 }: React.PropsWithoutRef<{ dispatch: StateDispatch } & RouteComponentProps>) => {
-  const neuronWalletState = useState()
+  const [hasReadTerms, setHasReadTerms] = useState(window.localStorage.getItem(HAS_READ_TERMS))
+  const neuronWalletState = useWalletState()
   const {
     wallet: { id: walletID = '' },
   } = neuronWalletState
@@ -62,6 +64,10 @@ const MainContent = ({
   useSubscription({ walletID, history, dispatch })
 
   useOnCurrentWalletChange({ walletID, i18n, history, dispatch })
+
+  if (hasReadTerms !== 'true') {
+    return <Terms setHasReadTerms={setHasReadTerms} />
+  }
 
   return (
     <>

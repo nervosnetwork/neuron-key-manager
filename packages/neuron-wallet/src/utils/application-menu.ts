@@ -5,11 +5,23 @@ import i18n from 'utils/i18n'
 import AppController from 'controllers/app'
 import WalletsService from 'services/wallets'
 import { ExternalURL } from 'utils/const'
+import CommandSubject from 'models/subjects/command'
+import WindowManager from 'models/window-manager'
 
 const isMac = process.platform === 'darwin'
 
 const separator: MenuItemConstructorOptions = {
   type: 'separator',
+}
+
+const requestPassword = (walletID: string, actionType: 'delete-wallet' | 'backup-wallet') => {
+  if (WindowManager.mainWindow) {
+    CommandSubject.next({
+      winID: WindowManager.mainWindow.id,
+      type: actionType,
+      payload: walletID,
+    })
+  }
 }
 
 const generateTemplate = () => {
@@ -51,13 +63,13 @@ const generateTemplate = () => {
         id: 'backup',
         label: i18n.t('application-menu.wallet.backup'),
         enabled: hasWallet,
-        click: () => { walletsService.requestPassword(currentWallet!.id, 'backup-wallet') }
+        click: () => { requestPassword(currentWallet!.id, 'backup-wallet') }
       },
       {
         id: 'delete',
         label: i18n.t('application-menu.wallet.delete'),
         enabled: hasWallet,
-        click: () => { walletsService.requestPassword(currentWallet!.id, 'delete-wallet') }
+        click: () => { requestPassword(currentWallet!.id, 'delete-wallet') }
       },
     ],
   }

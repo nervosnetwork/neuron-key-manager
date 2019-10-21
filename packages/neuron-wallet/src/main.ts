@@ -30,6 +30,7 @@ app.on('ready', async () => {
 
   WalletListSubject.pipe(debounceTime(50)).subscribe(() => {
     dataUpdateSubject.next({ dataType: 'wallets', actionType: 'update' })
+    updateApplicationMenu()
   })
 
   CurrentWalletSubject.pipe(debounceTime(50)).subscribe(async ({ currentWallet = null }) => {
