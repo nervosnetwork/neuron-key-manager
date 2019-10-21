@@ -1,139 +1,135 @@
 {
-  "translation": {
-    "launch-screen": {
-      "loading-wallets": "钱包加载中"
-    },
-    "wizard": {
-      "welcome-to-nervos-neuron": "欢迎使用 Neuron Key Manager",
-      "create-or-import-your-first-wallet": "创建或导入一个钱包",
-      "create-new-wallet": "创建新钱包",
-      "import-mnemonic": "导入助记词",
-      "import-keystore": "导入 Keystore 文件",
-      "import-wallet": "导入钱包",
-      "next": "下一步",
-      "back": "上一步",
+  "launch-screen": {
+    "loading-wallets": "钱包加载中"
+  },
+  "wizard": {
+    "welcome-to-nervos-neuron": "欢迎使用 Neuron Key Manager",
+    "create-or-import-your-first-wallet": "创建或导入一个钱包",
+    "create-new-wallet": "创建新钱包",
+    "import-mnemonic": "导入助记词",
+    "import-keystore": "导入 Keystore 文件",
+    "import-wallet": "导入钱包",
+    "next": "下一步",
+    "back": "上一步",
+    "name": "钱包名称",
+    "your-wallet-seed-is": "已生成新的助记词",
+    "input-your-seed": "请输入您的助记词",
+    "password": "密码",
+    "confirm-password": "确认密码",
+    "set-wallet-name-and-password": "为新钱包命名, 并设置密码",
+    "set-wallet-name": "为钱包设置名称",
+    "set-a-strong-password-to-protect-your-wallet": "请设置一个强密码用于保护您的钱包",
+    "wallet-suffix": "钱包 {{suffix}}",
+    "write-down-seed": "请记下您的助记词并保存到安全的地方",
+    "new-name": "输入新的钱包名称",
+    "complex-password": "密码为 8 至 50 位由大写字母、小写字母、数字、特殊符号中至少三类字符组成的字符串, 且必须以字母或者数字开头",
+    "same-password": "两次输入密码应一致"
+  },
+  "import-keystore": {
+    "label": {
+      "path": "Keystore 文件",
       "name": "钱包名称",
-      "your-wallet-seed-is": "已生成新的助记词",
-      "input-your-seed": "请输入您的助记词",
-      "password": "密码",
-      "confirm-password": "确认密码",
-      "set-wallet-name-and-password": "为新钱包命名, 并设置密码",
-      "set-wallet-name": "为钱包设置名称",
-      "set-a-strong-password-to-protect-your-wallet": "请设置一个强密码用于保护您的钱包",
-      "wallet-suffix": "钱包 {{suffix}}",
-      "write-down-seed": "请记下您的助记词并保存到安全的地方",
-      "new-name": "输入新的钱包名称",
-      "complex-password": "密码为 8 至 50 位由大写字母、小写字母、数字、特殊符号中至少三类字符组成的字符串, 且必须以字母或者数字开头",
-      "same-password": "两次输入密码应一致"
+      "password": "密码"
     },
-    "import-keystore": {
-      "label": {
-        "path": "Keystore 文件",
-        "name": "钱包名称",
-        "password": "密码"
-      },
-      "placeholder": {
-        "path": "选择 Keystore 文件",
-        "name": "新钱包名称",
-        "password": "输入密码以验证 Keystore"
-      },
-      "button": {
-        "back": "返回",
-        "submit": "提交"
-      }
+    "placeholder": {
+      "path": "选择 Keystore 文件",
+      "name": "新钱包名称",
+      "password": "输入密码以验证 Keystore"
     },
-    "receive": {
-      "click-to-copy": "点击复制地址",
-      "copy-address": "复制地址",
-      "address-not-found": "未找到地址",
-      "prompt": "CKB 主网上线后，请使用官方 Neuron 钱包查看余额或进行转账操作。",
-      "mainnet-address": "CKB 主网地址"
+    "button": {
+      "back": "返回",
+      "submit": "提交"
+    }
+  },
+  "receive": {
+    "click-to-copy": "点击复制地址",
+    "copy-address": "复制地址",
+    "address-not-found": "未找到地址",
+    "prompt": "CKB 主网上线后，请使用官方 Neuron 钱包查看余额或进行转账操作。",
+    "mainnet-address": "CKB 主网地址"
+  },
+  "password-request": {
+    "wallet-not-found": "找不到该钱包",
+    "password": "密码",
+    "send": {
+      "title": "发起交易"
     },
-    "password-request": {
-      "wallet-not-found": "找不到该钱包",
-      "password": "密码",
-      "send": {
-        "title": "发起交易"
-      },
-      "delete": {
-        "title": "删除钱包 {{name}}"
-      },
-      "backup": {
-        "title": "备份钱包 {{name}}"
-      }
+    "delete": {
+      "title": "删除钱包 {{name}}"
     },
-    "qrcode": {
-      "copy": "复制图片",
-      "save": "保存二维码图片"
+    "backup": {
+      "title": "备份钱包 {{name}}"
+    }
+  },
+  "qrcode": {
+    "copy": "复制图片",
+    "save": "保存二维码图片"
+  },
+  "common": {
+    "or": "或",
+    "confirm": "确认",
+    "cancel": "取消",
+    "save": "保存",
+    "toggle": {
+      "on": "开",
+      "off": "关"
+    }
+  },
+  "notification-panel": {
+    "title": "通知中心"
+  },
+  "message-types": {
+    "warning": "警告",
+    "alert": "错误",
+    "success": "成功"
+  },
+  "messages": {
+    "error": "错误",
+    "unknown-error": "未知错误",
+    "update-wallet-successfully": "已更新钱包信息",
+    "delete-wallet-successfully": "已删除钱包",
+    "addr-copied": "已复制地址到剪贴板",
+    "qrcode-copied": "已复制二维码到剪贴板",
+    "fields": {
+      "wallet": "钱包",
+      "name": "名称",
+      "address": "地址",
+      "default-address": "默认地址",
+      "mnemonic": "助记词",
+      "keystore-path": "Keystore 文件",
+      "keystore-name": "钱包名称",
+      "keystore-password": "密码"
     },
-    "common": {
-      "or": "或",
-      "confirm": "确认",
-      "cancel": "取消",
-      "save": "保存",
-      "toggle": {
-        "on": "开",
-        "off": "关"
-      }
+    "codes": {
+      "-3": "",
+      "102": "$t(messages.fields.{{fieldName}})无效",
+      "201": "缺少$t(messages.fields.{{fieldName}})",
+      "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 已被使用",
+      "203": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 太长, 其长度应不超过 {{length}}",
+      "204": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 太短, 其长度应不小于 {{length}}",
+      "205": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效",
+      "206": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其小数位应不超过 {{length}} 位",
+      "207": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其值不能为负数",
+      "208": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其值应以 http(s):// 开始",
+      "209": "$t(messages.fields.{{fieldName}})不能包含空格",
+      "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 不可删除",
+      "302": "无法启动应用",
+      "303": "未找到$t(messages.fields.{{fieldName}})",
+      "305": "$t(messages.fields.address)不能为空"
+    }
+  },
+  "terms": {
+    "title": "用户条款",
+    "intro": "在使用本软件之前, 您必须确认一下条款",
+    "for-us-residents": {
+      "label": "我是美国居民",
+      "exit": "不同意",
+      "agree": "我是美国居民, 且同意上述条款"
     },
-    "notification-panel": {
-      "title": "通知中心"
-    },
-    "message-types": {
-      "warning": "警告",
-      "alert": "错误",
-      "success": "成功"
-    },
-    "messages": {
-      "error": "错误",
-      "unknown-error": "未知错误",
-      "update-wallet-successfully": "已更新钱包信息",
-      "delete-wallet-successfully": "已删除钱包",
-      "addr-copied": "已复制地址到剪贴板",
-      "qrcode-copied": "已复制二维码到剪贴板",
-      "fields": {
-        "wallet": "钱包",
-        "name": "名称",
-        "address": "地址",
-        "default-address": "默认地址",
-        "mnemonic": "助记词",
-        "keystore-path": "Keystore 文件",
-        "keystore-name": "钱包名称",
-        "keystore-password": "密码"
-      },
-      "codes": {
-        "-3": "",
-        "102": "$t(messages.fields.{{fieldName}})无效",
-        "201": "缺少$t(messages.fields.{{fieldName}})",
-        "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 已被使用",
-        "203": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 太长, 其长度应不超过 {{length}}",
-        "204": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 太短, 其长度应不小于 {{length}}",
-        "205": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效",
-        "206": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其小数位应不超过 {{length}} 位",
-        "207": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其值不能为负数",
-        "208": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 无效, 其值应以 http(s):// 开始",
-        "209": "$t(messages.fields.{{fieldName}})不能包含空格",
-        "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} 不可删除",
-        "302": "无法启动应用",
-        "303": "未找到$t(messages.fields.{{fieldName}})",
-        "305": "$t(messages.fields.address)不能为空"
-      }
-    },
-    "terms": {
-      "title": "用户条款",
-      "intro": "在使用本软件之前, 您必须确认一下条款",
-      "for-us-residents": {
-        "label": "我是美国居民",
-        "terms": "Terms for US Residents",
-        "exit": "不同意",
-        "agree": "我是美国居民, 且同意上述条款"
-      },
-      "for-non-us-residents": {
-        "label": "我不是美国居民",
-        "terms": "Terms for Non US Residents",
-        "exit": "不同意",
-        "agree": "我不是美国居民, 且同意上述条款"
-      }
+    "for-non-us-residents": {
+      "label": "我不是美国居民",
+      "exit": "不同意",
+      "agree": "我不是美国居民, 且同意上述条款"
     }
   }
 }

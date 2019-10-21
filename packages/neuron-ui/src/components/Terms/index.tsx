@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react' 
 import {
   Label,
   Pivot,
@@ -8,6 +8,7 @@ import {
   DefaultButton,
   PrimaryButton,
   Stack,
+  getTheme,
 } from 'office-ui-fabric-react'
 import { useTranslation } from 'react-i18next'
 import { HAS_READ_TERMS } from 'utils/const'
@@ -36,16 +37,18 @@ const Terms = ({ setHasReadTerms }: { setHasReadTerms: Function }) => {
     }
   }
 
+  const { semanticColors } = getTheme()
+
   return (
     <div>
-      <Label required>{t('terms.intro')}</Label>
+      <Label styles={{ root: { color: semanticColors.primaryButtonBackground } }}>{t('terms.intro')}</Label>
       <Pivot linkSize={PivotLinkSize.large}>
         {['for-us-residents', 'for-non-us-residents'].map((type: string) => (
           <PivotItem key={type} headerText={t(`terms.${type}.label`)}>
             <TextField
               multiline
               resizable={false}
-              value={t(`terms.${type}.terms`)}
+              value={t(`${type}.agreement`)}
               styles={{
                 root: {
                   margin: '15px 0',

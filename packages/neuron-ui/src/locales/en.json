@@ -1,137 +1,133 @@
 {
-  "translation": {
-    "launch-screen": {
-      "loading-wallets": "Loading wallets"
+  "launch-screen": {
+    "loading-wallets": "Loading wallets"
+  },
+  "wizard": {
+    "welcome-to-nervos-neuron": "Welcome to Neuron Key Manager",
+    "create-or-import-your-first-wallet": "Create or import your wallet",
+    "create-new-wallet": "Create a Wallet",
+    "import-mnemonic": "Import Wallet Seed",
+    "import-keystore": "Import from Keystore",
+    "import-wallet": "Import a Wallet",
+    "next": "Next",
+    "back": "Back",
+    "name": "Name",
+    "your-wallet-seed-is": "Your new wallet seed has been generated",
+    "input-your-seed": "Please input your wallet seed",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "set-wallet-name-and-password": "Name your new wallet, and choose a strong password to protect it",
+    "set-wallet-name": "Give your new wallet a name",
+    "set-a-strong-password-to-protect-your-wallet": "Create a strong password to protect your wallet",
+    "wallet-suffix": "Wallet {{suffix}}",
+    "write-down-seed": "Write down your wallet seed and save it in a safe place",
+    "new-name": "Use an unused name for the new wallet",
+    "complex-password": "The password should be 8 to 50 characters long containing at least three character categories among the following: uppercase letters, lowercase letters, numbers, and special symbols, and must start with a letter or a number.",
+    "same-password": "The password and confirm password should match"
+  },
+  "import-keystore": {
+    "label": {
+      "path": "Keystore File",
+      "name": "Wallet Name",
+      "password": "Password"
     },
-    "wizard": {
-      "welcome-to-nervos-neuron": "Welcome to Neuron Key Manager",
-      "create-or-import-your-first-wallet": "Create or import your wallet",
-      "create-new-wallet": "Create a Wallet",
-      "import-mnemonic": "Import Wallet Seed",
-      "import-keystore": "Import from Keystore",
-      "import-wallet": "Import a Wallet",
-      "next": "Next",
+    "placeholder": {
+      "path": "Click to select the keystore file",
+      "name": "Name for the new wallet",
+      "password": "Password to verify the keystore"
+    },
+    "button": {
       "back": "Back",
+      "submit": "Submit"
+    }
+  },
+  "receive": {
+    "click-to-copy": "Click to copy the address",
+    "copy-address": "Copy Address",
+    "address-not-found": "Address not found",
+    "prompt": "Please use the official Neuron wallet to check balance and process transactions after CKB mainnet launch.",
+    "mainnet-address": "CKB Mainnet Address",
+    "address-qrcode": "Address QR Code"
+  },
+  "password-request": {
+    "wallet-not-found": "The wallet is not found",
+    "password": "Password",
+    "delete": {
+      "title": "Delete the {{name}} wallet"
+    },
+    "backup": {
+      "title": "Backup the {{name}} wallet"
+    }
+  },
+  "qrcode": {
+    "copy": "Copy image",
+    "save": "Save QR Image"
+  },
+  "common": {
+    "or": "or",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "toggle": {
+      "on": "On",
+      "off": "Off"
+    }
+  },
+  "notification-panel": {
+    "title": "Notifications"
+  },
+  "message-types": {
+    "warning": "warning",
+    "alert": "alert",
+    "success": "success"
+  },
+  "messages": {
+    "error": "Error",
+    "unknown-error": "Unknown error",
+    "update-wallet-successfully": "The wallet was updated",
+    "delete-wallet-successfully": "The wallet was deleted",
+    "addr-copied": "Address has been copied to the clipboard",
+    "qrcode-copied": "QR Code has been copied to the clipboard",
+    "fields": {
+      "wallet": "Wallet",
       "name": "Name",
-      "your-wallet-seed-is": "Your new wallet seed has been generated",
-      "input-your-seed": "Please input your wallet seed",
-      "password": "Password",
-      "confirm-password": "Confirm Password",
-      "set-wallet-name-and-password": "Name your new wallet, and choose a strong password to protect it",
-      "set-wallet-name": "Give your new wallet a name",
-      "set-a-strong-password-to-protect-your-wallet": "Create a strong password to protect your wallet",
-      "wallet-suffix": "Wallet {{suffix}}",
-      "write-down-seed": "Write down your wallet seed and save it in a safe place",
-      "new-name": "Use an unused name for the new wallet",
-      "complex-password": "The password should be 8 to 50 characters long containing at least three character categories among the following: uppercase letters, lowercase letters, numbers, and special symbols, and must start with a letter or a number.",
-      "same-password": "The password and confirm password should match"
+      "address": "Address",
+      "default-address": "Default Address",
+      "mnemonic": "Mnemonic",
+      "keystore-path": "Keystore File",
+      "keystore-name": "Wallet name",
+      "keystore-password": "Password"
     },
-    "import-keystore": {
-      "label": {
-        "path": "Keystore File",
-        "name": "Wallet Name",
-        "password": "Password"
-      },
-      "placeholder": {
-        "path": "Click to select the keystore file",
-        "name": "Name for the new wallet",
-        "password": "Password to verify the keystore"
-      },
-      "button": {
-        "back": "Back",
-        "submit": "Submit"
-      }
+    "codes": {
+      "-3": "",
+      "102": "$t(messages.fields.{{fieldName}}) is invalid",
+      "201": "$t(messages.fields.{{fieldName}}) is required",
+      "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is used",
+      "203": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is too long, it should be shorter than or equal to {{length}}",
+      "204": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is too short, it should be longer than or equal to {{length}}",
+      "205": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid",
+      "206": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, please enter the $t(messages.fields.{{fieldName}}) with no more than {{length}} decimal places",
+      "207": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, it cannot be negative",
+      "208": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, it should start with http(s)://",
+      "209": "$t(messages.fields.{{fieldName}}) should have no whitespaces",
+      "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is irremovable",
+      "302": "Fail to launch the app",
+      "303": "$t(messages.fields.{{fieldName}}) is not found",
+      "305": "$t(messages.fields.address) cannot be empty"
+    }
+  },
+  "terms": {
+    "title": "User Agreement",
+    "intro": "You must accept the following agreement before using this software.",
+    "for-us-residents": {
+      "label": "FOR U.S RESIDENTS",
+      "exit": "Exit",
+      "agree": "I'm U.S. Resident & I Accept the Agreement"
     },
-    "receive": {
-      "click-to-copy": "Click to copy the address",
-      "copy-address": "Copy Address",
-      "address-not-found": "Address not found",
-      "prompt": "Please use the official Neuron wallet to check balance and process transactions after CKB mainnet launch.",
-      "mainnet-address": "CKB Mainnet Address",
-      "address-qrcode": "Address QR Code"
-    },
-    "password-request": {
-      "wallet-not-found": "The wallet is not found",
-      "password": "Password",
-      "delete": {
-        "title": "Delete the {{name}} wallet"
-      },
-      "backup": {
-        "title": "Backup the {{name}} wallet"
-      }
-    },
-    "qrcode": {
-      "copy": "Copy image",
-      "save": "Save QR Image"
-    },
-    "common": {
-      "or": "or",
-      "confirm": "Confirm",
-      "cancel": "Cancel",
-      "save": "Save",
-      "toggle": {
-        "on": "On",
-        "off": "Off"
-      }
-    },
-    "notification-panel": {
-      "title": "Notifications"
-    },
-    "message-types": {
-      "warning": "warning",
-      "alert": "alert",
-      "success": "success"
-    },
-    "messages": {
-      "error": "Error",
-      "unknown-error": "Unknown error",
-      "update-wallet-successfully": "The wallet was updated",
-      "delete-wallet-successfully": "The wallet was deleted",
-      "addr-copied": "Address has been copied to the clipboard",
-      "qrcode-copied": "QR Code has been copied to the clipboard",
-      "fields": {
-        "wallet": "Wallet",
-        "name": "Name",
-        "address": "Address",
-        "default-address": "Default Address",
-        "mnemonic": "Mnemonic",
-        "keystore-path": "Keystore File",
-        "keystore-name": "Wallet name",
-        "keystore-password": "Password"
-      },
-      "codes": {
-        "-3": "",
-        "102": "$t(messages.fields.{{fieldName}}) is invalid",
-        "201": "$t(messages.fields.{{fieldName}}) is required",
-        "202": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is used",
-        "203": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is too long, it should be shorter than or equal to {{length}}",
-        "204": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is too short, it should be longer than or equal to {{length}}",
-        "205": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid",
-        "206": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, please enter the $t(messages.fields.{{fieldName}}) with no more than {{length}} decimal places",
-        "207": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, it cannot be negative",
-        "208": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is invalid, it should start with http(s)://",
-        "209": "$t(messages.fields.{{fieldName}}) should have no whitespaces",
-        "301": "$t(messages.fields.{{fieldName}}) {{fieldValue}} is irremovable",
-        "302": "Fail to launch the app",
-        "303": "$t(messages.fields.{{fieldName}}) is not found",
-        "305": "$t(messages.fields.address) cannot be empty"
-      }
-    },
-    "terms": {
-      "title": "User Agreement",
-      "intro": "You must accept the following agreement before using this software.",
-      "for-us-residents": {
-        "label": "FOR U.S RESIDENTS",
-        "terms": "Terms for US Residents",
-        "exit": "Exit",
-        "agree": "I'm U.S. Resident & I Accept the Agreement"
-      },
-      "for-non-us-residents": {
-        "label": "FOR NON-U.S. RESIDENTS",
-        "terms": "Terms for Non US Residents",
-        "exit": "Exit",
-        "agree": "I'm NON-US Resident & I Accept the Agreement"
-      }
+    "for-non-us-residents": {
+      "label": "FOR NON-U.S. RESIDENTS",
+      "exit": "Exit",
+      "agree": "I'm NON-U.S. Resident & I Accept the Agreement"
     }
   }
 }
