@@ -3,19 +3,17 @@ import { initReactI18next } from 'react-i18next'
 import { getLocale } from 'services/remote'
 
 import zh from 'locales/zh.json'
-import agreementUsZh from 'locales/agreement-us-zh.json'
-import agreementNonUsZh from 'locales/agreement-non-us-zh.json'
 import en from 'locales/en.json'
-import agreementUsEn from 'locales/agreement-us-en.json'
-import agreementNonUsEn from 'locales/agreement-non-us-en.json'
+import agreementUs from 'locales/agreement-us.json'
+import agreementNonUs from 'locales/agreement-non-us.json'
 
 const locale = getLocale()
 const lng = ['zh', 'zh-CN'].includes(locale) ? 'zh' : 'en'
 
 i18n.use(initReactI18next).init({
   resources: {
-    en: { translation: { ...en, ...agreementUsEn, ...agreementNonUsEn } },
-    zh: { translation: { ...zh, ...agreementUsZh, ...agreementNonUsZh } },
+    en: { translation: { ...en, ...agreementUs, ...agreementNonUs } },
+    zh: { translation: { ...zh, ...agreementUs, ...agreementNonUs } },
   },
   fallbackLng: lng,
   interpolation: {
