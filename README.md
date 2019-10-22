@@ -5,25 +5,23 @@
 
 ---
 
-## Quick Start
+## Download Neuron Key Manager
+
+Download binary from [releases](https://github.com/nervosnetwork/neuron-key-manager/releases). We offer pre-built binaries for Windows, Linux and macOS.
+
+Please use the official [Neuron wallet](https://github.com/nervosnetwork/neuron) to check balance and process transactions after CKB mainnet launch.
+
+## Build from Source
 
 ### Prerequisites
 
-You will need `node >= 12` and `yarn >= 1.14` to build and run Neuron Key Manager.
-
-#### Lerna
-
-This project uses [lerna](https://github.com/lerna/lerna/) for package management. It can be installed either globally or locally within the project:
-
-```sh
-$ yarn global add lerna # install lerna globally
-# or
-$ yarn add lerna --exact --ignore-workspace-root-check # install lerna locally within the project
-```
+* node >= 12
+* yarn >= 1.14
+* [lerna](https://github.com/lerna/lerna/)
 
 #### Install Dependencies
 
-After lerna has been installed, run this to install and link dependencies:
+Run this to install and link dependencies:
 
 ```sh
 $ yarn bootstrap
@@ -34,34 +32,6 @@ $ yarn bootstrap
 ```sh
 $ yarn start
 ```
-
-This command will start two tasks:
-
-1. start `neuron-ui`, which is the React UI layer.
-2. start `neuron-wallet`, which is the core wallet layer.
-
-You can also start them independently:
-
-```sh
-# start neuron-ui at `http://localhost:3000`
-$ yarn start:ui
-```
-
-```sh
-# start neuron-wallet
-$ yarn start:wallet
-```
-
-### Test
-
-```sh
-# launch the test runner.
-$ yarn test
-```
-
-## Download Neuron Key Manager
-
-If you don't want to bother building from source, you can download a binary from [releases](https://github.com/nervosnetwork/neuron-key-manager/releases). We offer pre-built binaries for Windows, Linux and macOS.
 
 ## License
 
