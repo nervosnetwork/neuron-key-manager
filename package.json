@@ -2,7 +2,7 @@
   "name": "neuron",
   "productName": "Neuron Key Manager",
   "description": "CKB Neuron Key Manager",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
