@@ -3,7 +3,7 @@
   "productName": "Neuron Key Manager",
   "description": "CKB Neuron Wallet - Key Manager",
   "homepage": "https://www.nervos.org/",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "author": {
     "name": "Nervos Core Dev",
@@ -50,7 +50,7 @@
     "electron-builder": "21.2.0",
     "electron-devtools-installer": "2.2.4",
     "electron-notarize": "0.1.1",
-    "neuron-ui": "1.0.2",
+    "neuron-ui": "1.0.3",
     "rimraf": "3.0.0",
     "spectron": "8.0.0",
     "ts-transformer-imports": "0.4.3",
